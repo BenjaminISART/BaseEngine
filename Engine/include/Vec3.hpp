@@ -1,5 +1,5 @@
-#ifndef __FOO__
-#define __FOO__
+#ifndef __VEC3__
+#define __VEC3__
 
 #include <iostream>
 #include <type_traits>
@@ -10,10 +10,10 @@ namespace ptm
     {
         // <Values>
 
-            float x;
-            float y;
-            float z;
-            float w;
+            float x{};
+            float y{};
+            float z{};
+            float w{};
 
         // </Values>
 
@@ -45,17 +45,17 @@ namespace ptm
             [[ nodiscard ]]
             static constexpr float Dot(Vec3 const& v1, Vec3 const& v2) noexcept;
 
-            /* return the cross product between v1 and v2 */
+            /* return the Cross product between v1 and v2 */
             [[ nodiscard ]]
             static constexpr Vec3 Cross(Vec3 const& v1, Vec3 const& v2) noexcept;
 
             /* return the dot product between this Vec3 and v */
             [[ nodiscard ]]
-            constexpr float Dot(Vec3 const& v) noexcept;
+            constexpr float Dot(Vec3 const& v) const noexcept;
 
-            /* return the cross product between this Vec3 and v */
+            /* return the Cross product between this Vec3 and v */
             [[ nodiscard ]]
-            constexpr Vec3 Cross(Vec3 const& v) noexcept;
+            constexpr Vec3 Cross(Vec3 const& v) const noexcept;
 
             /* return the magnitude of v */
             [[ nodiscard ]]
@@ -75,7 +75,7 @@ namespace ptm
 
             /* return the distance between this Vec3 and v */
             [[ nodiscard ]]
-            constexpr float Distance(Vec3 const& v) noexcept;
+            constexpr float Distance(Vec3 const& v) const noexcept;
 
             /* return the distance between v1 and v2 */
             [[ nodiscard ]]
@@ -86,7 +86,7 @@ namespace ptm
         // <Other>
 
             // print the vector3
-            void print() noexcept {std::cout << "Vec3(" << x << ", " << y << ", " << z << ")\n";}
+            void print() const {std::cout << "Vec3(" << x << ", " << y << ", " << z << ")\n";}
 
         // </Other>
 
@@ -98,8 +98,8 @@ namespace ptm
                 constexpr Vec3& operator+(Vec3&& v) noexcept;
                 constexpr void operator+=(Vec3 const& v) noexcept;
                 constexpr void operator+=(Vec3&& v) noexcept;
-                constexpr void operator=(Vec3 const& v) noexcept;
-                constexpr Vec3 operator-() noexcept;
+                constexpr Vec3& operator=(Vec3 const& v) noexcept;
+                constexpr Vec3 operator-() const noexcept;
 
             // </In>
 
@@ -110,31 +110,36 @@ namespace ptm
                 friend constexpr Vec3 operator ""_Vec3x(unsigned long long x);
                 friend constexpr Vec3 operator "" _Vec3y(unsigned long long y);
                 friend constexpr Vec3 operator "" _Vec3z(unsigned long long z);
-                friend constexpr Vec3 operator "" _Vec3(unsigned long long v);
+                friend constexpr Vec3 operator "" _Vec3(unsigned long long a);
+				friend constexpr Vec3 operator ""_Vec3x(const long double x);
+				friend constexpr Vec3 operator "" _Vec3y(const long double y);
+				friend constexpr Vec3 operator "" _Vec3z(const long double z);
+				friend constexpr Vec3 operator "" _Vec3(const long double a);
 
             // </Out>
 
         // </Operators>
-    };
+
+    }; // /Vec3
 
     // <Vec3 outsided declarations of operators and literals>
 
         // return a literal type
-        constexpr Vec3 operator ""_Vec3x(long double x);
+        constexpr Vec3 operator ""_Vec3x(const long double x);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3y(long double y);
+        constexpr Vec3 operator ""_Vec3y(const long double y);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3z(long double z);
+        constexpr Vec3 operator ""_Vec3z(const long double z);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3(long double a);
+        constexpr Vec3 operator ""_Vec3(const long double a);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3x(unsigned long long x);
+        constexpr Vec3 operator ""_Vec3x(const unsigned long long x);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3y(unsigned long long y);
+        constexpr Vec3 operator ""_Vec3y(const unsigned long long y);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3z(unsigned long long z);
+        constexpr Vec3 operator ""_Vec3z(const unsigned long long z);
         // return a literal type
-        constexpr Vec3 operator ""_Vec3(unsigned long long a);
+        constexpr Vec3 operator ""_Vec3(const unsigned long long a);
 
         inline std::ostream& operator<<(std::ostream& os, const Vec3& dt);
 

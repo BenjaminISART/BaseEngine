@@ -18,11 +18,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Math.hpp">
-      <Filter>Fichiers d%27en-tête\Math</Filter>
-    </ClInclude>
     <ClInclude Include="include\Vec3.hpp">
       <Filter>Fichiers d%27en-tête\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mat4.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -32,10 +35,16 @@
     <ClCompile Include="src\Vec3.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mat4.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Vec3.inl">
       <Filter>Fichiers d%27en-tête\Math</Filter>
+    </None>
+    <None Include="include\Mat4.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
     </None>
   </ItemGroup>
 </Project>

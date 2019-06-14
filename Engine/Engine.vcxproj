@@ -20,13 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Math.hpp" />
+    <ClInclude Include="include\Mat4.hpp" />
     <ClInclude Include="include\Vec3.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\Mat4.inl" />
     <None Include="include\Vec3.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\main.cpp">
+      <DeploymentContent>false</DeploymentContent>
+    </ClCompile>
+    <ClCompile Include="src\Mat4.cpp" />
     <ClCompile Include="src\Vec3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

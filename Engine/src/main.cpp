@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Vec3.hpp"
+#include "Mat4.hpp"
 
 using namespace ptm;
 
@@ -11,7 +12,10 @@ int main()
 	Vec3 v = 1_Vec3x;
 	Vec3 v2 = 1_Vec3y;
 
-	Vec3::Magnitude(v);
+	Mat4 m(4.0f);
+
+	std::cout << m << std::endl;
+	m.print();
 
 	std::cout << Vec3::Normal(v).Magnitude() << std::endl;
 }

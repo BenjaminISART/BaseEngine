@@ -5,14 +5,14 @@ namespace ptm
 {
 	#pragma region SQRT
 
-		double constexpr sqrtNewtonRaphson(double x, double curr, double prev)
+		double constexpr sqrtNewtonRaphson(const double x, const double curr, const double prev)
 		{
 			return curr == prev
 				? curr
 				: sqrtNewtonRaphson(x, 0.5 * (curr + x / curr), curr);
 		}
 
-		double constexpr sqrt(double x)
+		double constexpr sqrt(const double x)
 		{
 			return x >= 0 && x < std::numeric_limits<double>::infinity()
 				? sqrtNewtonRaphson(x, x, 0)
