@@ -19,20 +19,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Math.hpp" />
-    <ClInclude Include="include\Mat4.hpp" />
-    <ClInclude Include="include\Vec3.hpp" />
+    <ClInclude Include="include\Engine\Engine.hpp" />
+    <ClInclude Include="include\Engine\IUpdatable.hpp" />
+    <ClInclude Include="include\Engine\UpdateHandler.hpp" />
+    <ClInclude Include="include\Managers\InputManager.hpp" />
+    <ClInclude Include="include\Maths\Mat4_utils.hpp" />
+    <ClInclude Include="include\Maths\Math.hpp" />
+    <ClInclude Include="include\Maths\Mat4.hpp" />
+    <ClInclude Include="include\Maths\Vec3.hpp" />
+    <ClInclude Include="include\Objects\Components\Shader.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\Mat4.inl" />
-    <None Include="include\Vec3.inl" />
+    <None Include="include\Maths\Mat4.inl" />
+    <None Include="include\Maths\Vec3.inl" />
+    <None Include="Resources\light.fs" />
+    <None Include="Resources\light.vs" />
+    <None Include="Resources\object.fs" />
+    <None Include="Resources\object.vs" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Engine.cpp" />
+    <ClCompile Include="src\Engine\IUpdatable.cpp" />
+    <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp">
       <DeploymentContent>false</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="src\Mat4.cpp" />
-    <ClCompile Include="src\Vec3.cpp" />
+    <ClCompile Include="src\Managers\InputManager.cpp" />
+    <ClCompile Include="src\Maths\Mat4.cpp" />
+    <ClCompile Include="src\Maths\Mat4_utils.cpp" />
+    <ClCompile Include="src\Maths\Vec3.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\Engine\ex.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -88,6 +106,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\benja\Documents\OpenGL\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\benja\Documents\OpenGL\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -110,10 +130,13 @@
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalIncludeDirectories>C:\Users\benja\Desktop\Moteur2.0\MyEngine\Engine\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

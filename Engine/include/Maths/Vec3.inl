@@ -1,7 +1,7 @@
 #ifndef __Vec3INL__
 #define __Vec3INL__
 
-#include "Math.hpp"
+#include "Maths/Math.hpp"
 
 namespace ptm
 {
@@ -49,6 +49,11 @@ namespace ptm
                 return Vec3(float(a), float(a), float(a));
             }
 
+            inline void Vec3::Print() const
+            {
+	            std::cout << "Vec3(" << x << ", " << y << ", " << z << ")\n";
+            }
+
             inline std::ostream& operator<<(std::ostream& os, const Vec3& dt)
             {
                 os << "Vec3(" << dt.x << ", " << dt.y << ", " << dt.z << ")";
@@ -89,7 +94,12 @@ namespace ptm
                 return Vec3(-x,-y,-z);
             }
 
-		#pragma endregion
+            constexpr Vec3 Vec3::operator-(Vec3 const& v) const noexcept
+            {
+				return Vec3(x - v.x, y - v.y, z - v.z);
+            }
+
+#pragma endregion
         
 	#pragma endregion
 

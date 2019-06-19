@@ -6,7 +6,7 @@
 
 namespace ptm
 {
-    struct Vec3 final
+    struct Vec3
     {
         // <Values>
 
@@ -24,7 +24,7 @@ namespace ptm
             constexpr Vec3 (Vec3 const& v) noexcept;
             constexpr Vec3 (Vec3&& v) noexcept;
             constexpr Vec3 (Vec3 const& v1, Vec3 const& v2) noexcept;
-            ~Vec3() noexcept = default;
+			~Vec3() noexcept = default;
 
         // </CTOR / DTOR>
 
@@ -36,6 +36,8 @@ namespace ptm
             static const Vec3 up;
             // Vec3(1,0,0)
             static const Vec3 right;
+			// Vec3(1,0,0)
+			static const Vec3 zero;
 
         // </Constants>
 
@@ -86,7 +88,7 @@ namespace ptm
         // <Other>
 
             // print the vector3
-            void print() const {std::cout << "Vec3(" << x << ", " << y << ", " << z << ")\n";}
+			inline void Print() const;
 
         // </Other>
 
@@ -99,7 +101,8 @@ namespace ptm
                 constexpr void operator+=(Vec3 const& v) noexcept;
                 constexpr void operator+=(Vec3&& v) noexcept;
                 constexpr Vec3& operator=(Vec3 const& v) noexcept;
-                constexpr Vec3 operator-() const noexcept;
+				constexpr Vec3 operator-() const noexcept;
+				constexpr Vec3 operator-(Vec3 const& v) const noexcept;
 
             // </In>
 
@@ -146,6 +149,6 @@ namespace ptm
     // </>
 }
 
-#include "Vec3.inl"
+#include "Maths/Vec3.inl"
 
 #endif // __FOO__

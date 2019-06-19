@@ -20,6 +20,13 @@ namespace ptm
 		}
 
 	#pragma endregion personnal sqrt func
+
+
+	#define PI 3.141592f
+
+	constexpr float RAD(float const& x) { return x * PI / 180.0f; }
+	constexpr float DEG(float const& x) { return x * 180.0f / PI; }
+
 }
 
 #endif
