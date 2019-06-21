@@ -1,5 +1,7 @@
 #include "Engine/Engine.hpp"
+#include "Objects/Components/Shader.hpp"
 #include "Managers/InputManager.hpp"
+#include "Engine/UpdateHandler.hpp"
 
 namespace Core
 {
@@ -59,6 +61,10 @@ namespace Core
 			// -----
 			TestExit();
 
+			// update
+			// -----
+			Core::UpdateHandler::Instance()->UpdateAll();
+
 			// render
 			// ------
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -84,13 +90,17 @@ namespace Core
 		glViewport(0, 0, width, height);
 	}
 
+	int i = 0;
+
 	void Engine::TestExit()
 	{
-		if (Input->IsKeyDown(GLFW_KEY_A))
+		if (Input->IsPressingKey(GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(m_window, true);
 
-		if (Input->IsKeyDown(Managers::Key::B))
-			std::cout << "Hello World !" << std::endl;
+		if (Input->IsKeyDown(GLFW_KEY_A))
+			std::cout << i << std::endl;
 
+		if (Input->IsKeyDown(GLFW_KEY_T))
+			gO.AddComponent(new Objects::Components::Shader());
 	}
 }

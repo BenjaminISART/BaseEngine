@@ -8,14 +8,15 @@ namespace Core
 	private:
 		bool m_hasToUpdate;
 		bool m_enabled;
+		int m_ID;
 
 		friend class UpdateHandler;
 
 	public:
 		IUpdatable();
-		~IUpdatable() = default;
+		virtual ~IUpdatable();
 
-		virtual void Update() {};
+		virtual void Update() = 0;
 	};
 }
 

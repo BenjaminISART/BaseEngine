@@ -10,7 +10,7 @@ using namespace ptm;
 
 int main()
 {
-	Core::Engine* engine = Core::Engine::Instance();
+	Core::Engine* engine = EngineInst;
 	engine->Load();
 	engine->Run();
 	engine->Unload();

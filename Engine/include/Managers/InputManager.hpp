@@ -43,12 +43,23 @@ namespace Managers
 	private:
 		static std::unique_ptr<InputManager> m_instance;
 
-	public:
+		std::unordered_map<int, std::pair<bool, bool>> m_keys;
+
 		InputManager();
+		friend std::unique_ptr<InputManager> std::make_unique<InputManager>();
+
+	public:
+
 		~InputManager();
 
-		[[nodiscard]] bool IsKeyDown(const int& key) const;
+		[[nodiscard]]
+		bool IsPressingKey(const int& key) const;
+		[[nodiscard]]
+		bool IsKeyDown(const int& key);
+		[[nodiscard]]
+		bool IsKeyUp(const int& key);
 
+		[[nodiscard]]
 		static InputManager* Instance();
 	};
 }
