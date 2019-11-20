@@ -44,5 +44,6 @@ namespace ptm
 }
 
 #include "Mat4.inl"
+#include "Mat4_utils.hpp"
 
 #endif

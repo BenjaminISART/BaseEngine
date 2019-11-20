@@ -10,10 +10,10 @@ namespace ptm
     {
         // <Values>
 
-            float x{};
-            float y{};
-            float z{};
-            float w{};
+            float x;
+            float y;
+            float z;
+            float w;
 
         // </Values>
 
@@ -96,13 +96,17 @@ namespace ptm
 
             // <In>
 
-                constexpr Vec3& operator+(Vec3 const& v) noexcept;
-                constexpr Vec3& operator+(Vec3&& v) noexcept;
-                constexpr void operator+=(Vec3 const& v) noexcept;
-                constexpr void operator+=(Vec3&& v) noexcept;
+                constexpr Vec3 operator+(Vec3 const& v) const noexcept;
+                constexpr Vec3 operator+(Vec3&& v) const noexcept;
+                constexpr Vec3& operator+=(Vec3 const& v) noexcept;
+                constexpr Vec3& operator+=(Vec3&& v) noexcept;
                 constexpr Vec3& operator=(Vec3 const& v) noexcept;
 				constexpr Vec3 operator-() const noexcept;
 				constexpr Vec3 operator-(Vec3 const& v) const noexcept;
+				constexpr Vec3& operator-=(Vec3 const& v) noexcept;
+				constexpr Vec3 operator-(Vec3&& v) const noexcept;
+				constexpr Vec3 operator*(const float& v) const noexcept;
+				constexpr Vec3& operator*=(const float& v) noexcept;
 
             // </In>
 

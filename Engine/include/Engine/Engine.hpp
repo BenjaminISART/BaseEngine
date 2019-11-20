@@ -17,11 +17,10 @@ namespace Core
 	private:
 		GLFWwindow* m_window;
 
-		Objects::GameObject gO;
-
 		static std::unique_ptr<Engine> m_instance;
 
 		static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
+		static void MouseMotionCallback(GLFWwindow* w, double x, double y);
 		void TestExit();
 
 		friend std::unique_ptr<Engine> std::make_unique<Engine>();

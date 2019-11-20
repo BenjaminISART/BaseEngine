@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Scene1>
+
+  <Resource>
+
+    <Shader name ="object">
+      <vertex>Resources/Shaders/object.vs</vertex>
+      <fragment>Resources/Shaders/object.fs</fragment>
+    </Shader>
+
+    <Shader name ="light">
+      <vertex>Resources/Shaders/light.vs</vertex>
+      <fragment>Resources/Shaders/light.fs</fragment>
+    </Shader>
+
+    <Model name="eye">Resources/Model/eyeball.fbx</Model>
+    <Model name="dragon">Resources/Model/dragon.3ds</Model>
+    <Model name="quad">Resources/Model/quad.obj</Model>
+    <Model name="skull1">Resources/Model/Skull/Gufram_Jolly_Roger_mat(1).obj</Model>
+    <Model name="skull2">Resources/Model/Skull/Gufram_Jolly_Roger_mat(2).obj</Model>
+    <Model name="skull3">Resources/Model/Skull/Gufram_Jolly_Roger_mat(3).obj</Model>
+    <Model name="skull4">Resources/Model/Skull/Gufram_Jolly_Roger_mat(4).obj</Model>
+    <!--<Model name="city">Resources/Model/city.obj</Model>-->
+
+    <Texture name="white">Resources/Textures/white.jpg</Texture>
+
+  </Resource>
+  
+  <GameObject name="benji">
+    <Transform>0 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
+    <Shader>object</Shader>
+    <Model>skull1</Model>
+  </GameObject>
+
+  <GameObject name="benjis">
+    <Transform>10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
+    <Shader>object</Shader>
+    <Model>skull2</Model>
+  </GameObject>
+
+  <GameObject name="benjiss">
+    <Transform>-10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
+    <Shader>object</Shader>
+    <Model>skull2</Model>
+  </GameObject>
+
+  <GameObject name="benjiss">
+    <Transform>20 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
+    <Shader>object</Shader>
+    <Model>skull2</Model>
+  </GameObject>
+
+  <GameObject name="adel">
+    <Transform>0 0 0 0 0 0 1 1 1</Transform>
+    <Shader>object</Shader>
+    <!--<Model>eye</Model>-->
+    <Camera>0 0 0 0 0 10000 0 1 0</Camera>
+  </GameObject>
+
+</Scene1>

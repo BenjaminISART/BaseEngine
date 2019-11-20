@@ -14,5 +14,5 @@ int main()
 	engine->Load();
 	engine->Run();
 	engine->Unload();
-	return 0;
+	return 1;
 }

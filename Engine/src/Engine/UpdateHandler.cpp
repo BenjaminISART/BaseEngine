@@ -22,7 +22,7 @@ namespace Core
 
 	void UpdateHandler::UpdateAll()
 	{
-		std::cout << "begin update of " << m_updateList.size() << " objects" << std::endl;
+		//std::cout << "begin update of " << m_updateList.size() << " objects" << std::endl;
 		for (size_t i = 0; i < m_updateList.size(); i++)
 		{
 			if (m_updateList[i] != nullptr)
@@ -34,7 +34,7 @@ namespace Core
 			else
 				RemoveElement(i);
 		}
-		std::cout << "end" << std::endl;
+		//std::cout << "end" << std::endl;
 	}
 
 	void UpdateHandler::AddElement(IUpdatable* u)

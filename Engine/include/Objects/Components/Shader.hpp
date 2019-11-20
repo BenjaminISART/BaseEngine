@@ -1,20 +1,26 @@
 #ifndef __SHADER__
 #define __SHADER__
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "Objects/Components/Component.hpp"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
-#include "Objects/Components/Component.hpp"
 
 namespace Objects::Components
 {
-	class Shader : public Component
+	class Shader final : public Component
 	{
 	private:
 		GLuint m_ID;
 
+		void CheckCompileErrors(unsigned int id, std::string type);
+
 	public:
 		Shader();
+		Shader(std::string vs, std::string fs);
 		Shader(Shader const& s);
 		~Shader();
 
@@ -22,6 +28,10 @@ namespace Objects::Components
 
 		void Start() override {};
 		void Update() override;
+
+		void Use() const;
+
+		[[nodiscard]] GLuint ID() const { return m_ID; }
 	};
 }
 

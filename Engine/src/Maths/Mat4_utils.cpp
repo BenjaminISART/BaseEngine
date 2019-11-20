@@ -130,7 +130,7 @@ namespace ptm::Mat4_utils
 		Mat4 LookAt(const Vec3& eye, const Vec3& dir, const Vec3& up)
 		{
 			const Vec3 zaxis = (eye - dir).Normal();
-			const Vec3 xaxis = (Vec3::Cross(up.Normal(), zaxis)).Normal();
+			const Vec3 xaxis = Vec3::Cross(up.Normal(), zaxis).Normal();
 			const Vec3 yaxis = Vec3::Cross(zaxis, xaxis);
 
 			Mat4 translation = Mat4::identity;

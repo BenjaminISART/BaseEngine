@@ -1,4 +1,5 @@
 #include "Managers/InputManager.hpp"
+#include "DataStructure/Graph.hpp"
 #include "Engine/Engine.hpp"
 
 namespace Managers
@@ -67,5 +68,23 @@ namespace Managers
 			m_keys[key].second = true;
 
 		return false;
+	}
+
+	void InputManager::MouseCallback(GLFWwindow* window, double xpos, double ypos)
+	{
+		if (m_firstframemouse)
+		{
+			m_lastX = float(xpos);
+			m_lastY = float(ypos);
+			m_firstframemouse = false;
+		}
+
+		const float xoffset = float(xpos) - m_lastX;
+		const float yoffset = m_lastY - float(ypos); // reversed since y-coordinates go from bottom to top
+
+		m_lastX = float(xpos);
+		m_lastY = float(ypos);
+
+		SGraph->m_mainCamera->ProcessMouseMovement(xoffset, yoffset);
 	}
 }

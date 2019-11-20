@@ -4,7 +4,8 @@
 namespace Objects::Components
 {
 	Component::Component() :
-		m_firstFrame(true)
+		m_firstFrame(true),
+		m_gameObject(nullptr)
 	{
 		
 	}

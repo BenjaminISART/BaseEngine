@@ -2,15 +2,20 @@
 #define __GAMEOBJECT__
 
 #include "Engine/IUpdatable.hpp"
-#include "Objects/Components/Component.hpp"
+//#include "Objects/Components/Component.hpp"
 #include <vector>
 #include <memory>
 #include <type_traits>
 
-using namespace Objects::Components;
 
 namespace Objects
 {
+	namespace Components
+	{
+		class Component;
+	}
+
+	using namespace Components;
 
 	class GameObject final : public Core::IUpdatable
 	{
@@ -24,27 +29,21 @@ namespace Objects
 
 		GameObject& operator=(GameObject const& g);
 
+		void AddComponent(std::shared_ptr<Component> c);
 		void AddComponent(Component* c);
+
 		template<class T>
 		[[nodiscard]]
-		Component* GetComponent();
+		T* GetComponent();
 
+		[[nodiscard]] std::vector<std::shared_ptr<Component>> Components() const { return m_componentList; }
 
 		void Update() override;
 	};
 
-	// TODO faire un inl
-	template <class T>
-	Component* GameObject::GetComponent()
-	{
-		for (const std::shared_ptr<Component> c : m_componentList)
-		{
-			if (typeid(T) == typeid(*c))
-				return c.get();
-		}
-
-		return nullptr;
-	}
+	
 }
+
+#include "GameObject.inl"
 
 #endif

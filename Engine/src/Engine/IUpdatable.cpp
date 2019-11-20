@@ -15,6 +15,6 @@ namespace  Core
 	IUpdatable::~IUpdatable()
 	{
 		Core::UpdateHandler::Instance()->DisableElement(m_ID);
-		std::cout << "disqbling " << m_ID << std::endl;
+		//std::cout << "disabling " << m_ID << std::endl;
 	}
 }

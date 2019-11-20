@@ -64,27 +64,33 @@ namespace ptm
 
 		#pragma region In
             
-            constexpr Vec3& Vec3::operator+(Vec3 const& v) noexcept
+            constexpr Vec3 Vec3::operator+(Vec3 const& v) const noexcept
             {
-                x += v.x ; y += v.y ; z += v.z ; w += v.w ;
-                return *this;
+                return Vec3(x + v.x, y + v.y, z + v.z, w + v.w);
             }
 
-            constexpr void Vec3::operator+=(Vec3 const& v) noexcept
+            constexpr Vec3& Vec3::operator+=(Vec3 const& v) noexcept
             {
                 x += v.x ; y += v.y ; z += v.z ; w += v.w ;
+				return *this;
             }
 
-            constexpr Vec3& Vec3::operator+(Vec3&& v) noexcept
+            constexpr Vec3 Vec3::operator+(Vec3&& v) const noexcept
             {
-                x += v.x ; y += v.y ; z += v.z ; w += v.w ;
-                return *this;
+				return Vec3(x + v.x, y + v.y, z + v.z, w + v.w);
             }
 
-            constexpr void Vec3::operator+=(Vec3&& v) noexcept
+            constexpr Vec3& Vec3::operator+=(Vec3&& v) noexcept
             {
-                x += v.x ; y += v.y ; z += v.z ; w += v.w ;
+				x += v.x; y += v.y; z += v.z; w += v.w;
+				return *this;
             }
+
+			constexpr Vec3& Vec3::operator-=(const Vec3& v) noexcept
+			{
+				x -= v.x; y -= v.y; z -= v.z; w -= v.w;
+				return *this;
+			}
 
             constexpr Vec3& Vec3::operator=(Vec3 const& v) noexcept
             = default;
@@ -99,7 +105,26 @@ namespace ptm
 				return Vec3(x - v.x, y - v.y, z - v.z);
             }
 
-#pragma endregion
+			constexpr Vec3 Vec3::operator-(Vec3&& v) const noexcept
+			{
+				return Vec3(x - v.x, y - v.y, z - v.z);
+			}
+
+			constexpr Vec3 Vec3::operator*(const float& v) const noexcept
+			{
+				return Vec3(x * v, y * v, z * v);
+			}
+
+			constexpr Vec3& Vec3::operator*=(const float& v) noexcept
+			{
+				x *= v;
+            	y *= v;
+            	z *= v;
+            	w *= v;
+				return *this;
+			}
+
+		#pragma endregion
         
 	#pragma endregion
 

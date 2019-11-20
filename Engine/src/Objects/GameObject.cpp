@@ -1,4 +1,5 @@
 #include "Objects/GameObject.hpp"
+#include "Objects/Components/Component.hpp"
 #include <iostream>
 
 namespace Objects
@@ -20,9 +21,15 @@ namespace Objects
 		return *this;
 	}
 
+	void GameObject::AddComponent(std::shared_ptr<Component> c)
+	{
+		m_componentList.push_back(c);
+	}
+
 	void GameObject::AddComponent(Components::Component* c)
 	{
 		m_componentList.push_back(std::shared_ptr<Components::Component>(c));
+		c->m_gameObject = this;
 	}
 
 	void GameObject::Update()
@@ -34,6 +41,6 @@ namespace Objects
 				i->m_firstFrame = false;
 			}
 
-		std::cout << "update gameObject" << std::endl;
+		//std::cout << "update gameObject" << std::endl;
 	}
 }

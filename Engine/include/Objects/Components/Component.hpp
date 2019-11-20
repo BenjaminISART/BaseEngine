@@ -12,7 +12,7 @@ namespace Objects::Components
 {
 	class Component : public Core::IUpdatable
 	{
-	private:
+	protected:
 		bool m_firstFrame;
 
 		virtual void Start() = 0;
@@ -24,7 +24,15 @@ namespace Objects::Components
 		Component();
 		Component(Component const& c) = default;
 		virtual ~Component() = default;
+
+		template<class T>
+		[[nodiscard]]
+		T* GetComponent();
+
+		GameObject* m_gameObject;
 	};
 }
+
+#include "Component.inl"
 
 #endif
