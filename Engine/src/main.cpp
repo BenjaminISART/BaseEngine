@@ -10,9 +10,11 @@ using namespace ptm;
 
 int main()
 {
+#if 1
 	Core::Engine* engine = EngineInst;
 	engine->Load();
 	engine->Run();
 	engine->Unload();
-	return 1;
+#endif
+	return 0;
 }

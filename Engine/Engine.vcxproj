@@ -146,7 +146,20 @@
     <None Include="include\Maths\Vec3.inl" />
     <None Include="include\Objects\Components\Component.inl" />
     <None Include="include\Objects\GameObject.inl" />
+    <None Include="Resources\Model\city.mtl" />
+    <None Include="Resources\Model\dragon.3ds" />
     <None Include="Resources\Model\eyeball.fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_fbx_obj.zip" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_maps.zip" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(1).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(1).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(2).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(2).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(3).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(3).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(4).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(4).mtl" />
+    <None Include="Resources\Model\Transport Shuttle_fbx.fbx" />
     <None Include="Resources\Shaders\light.fs" />
     <None Include="Resources\Shaders\light.vs" />
     <None Include="Resources\Shaders\object.fs" />
@@ -186,6 +199,28 @@
     <Xml Include="Data\Scenes\Scene1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_bump.jpg" />
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_diff(1).jpg" />
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_diff.jpg" />
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_refl(1).jpg" />
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_refl.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Buster_Col_1.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Buster_Nor_2.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\DH_Ref_3.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Hover_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Hover_Nor_2.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Inside_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Inside_Nor.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Legs_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Legs_Nor.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Outside_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Outside_Nor_2.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Rest_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Rest_Nor.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Site_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Site_Nor.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Wire_Col.jpg" />
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Wire_Nor.jpg" />
     <Image Include="Resources\Textures\white.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -243,19 +278,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Users\benja\Documents\Assimp\Include;C:\Users\benja\Documents\Soil\Include;C:\Users\benja\Documents\OpenGL\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\benja\Documents\Assimp\Libs;C:\Users\benja\Documents\Soil\Libs;C:\Users\benja\Documents\OpenGL\Libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>../Libs;$(LibraryPath)</LibraryPath>
     <ExecutablePath>C:\Users\benja\Desktop\vcpkg-master\installed\x86-windows\bin;C:\Users\benja\Desktop\vcpkg-master\installed\x86-windows\debug\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\benja\Documents\Soil\Include;C:\Users\benja\Documents\OpenGL\Include;C:\Users\benja\Documents\Assimp\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\benja\Documents\OpenGL\Libs;C:\Users\benja\Documents\Soil\Libs;C:\Users\benja\Documents\Assimp\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\benja\Documents\Soil\Include;C:\Users\benja\Documents\OpenGL\Include;C:\Users\benja\Documents\Assimp\Include;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\Soil\Include;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\OpenGL\Include;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\Assimp\Include;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Engine\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\Assimp\Libs;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\Soil\Libs;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs\OpenGL\Libs;C:\Users\b.hamelin\Desktop\BaseMoteur\BaseEngine\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>../Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>../Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -267,7 +304,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\Assimp\Include;$(ProjectDir)..\Libs\OpenGL\Include;$(ProjectDir)..\Libs\Soil\Include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeaderFile />
       <PrecompiledHeaderOutputFile />
@@ -276,6 +313,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Libs\Assimp\Libs;$(ProjectDir)..\Libs\Soil\Libs;$(ProjectDir)..\Libs\OpenGL\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -287,13 +325,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\Assimp\Include;$(ProjectDir)..\Libs\OpenGL\Include;$(ProjectDir)..\Libs\Soil\Include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Libs\Assimp\Libs;$(ProjectDir)..\Libs\Soil\Libs;$(ProjectDir)..\Libs\OpenGL\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -454,6 +454,20 @@
     <None Include="include\Objects\Components\Component.inl">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_fbx_obj.zip" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_maps.zip" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(1).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(1).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(2).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(2).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(3).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(3).mtl" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(4).fbx" />
+    <None Include="Resources\Model\Skull\Gufram_Jolly_Roger_mat(4).mtl" />
+    <None Include="Resources\Model\city.mtl" />
+    <None Include="Resources\Model\dragon.3ds" />
+    <None Include="Resources\Model\Transport Shuttle_fbx.fbx" />
+    <None Include="assimp-vc140-mtd.dll" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\Engine\ex.txt" />
@@ -463,6 +477,72 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Textures\white.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_bump.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_diff(1).jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_diff.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_refl(1).jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Model\Skull\dcmap_Gufram_Jolly Roger_refl.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Buster_Col_1.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Buster_Nor_2.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\DH_Ref_3.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Hover_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Hover_Nor_2.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Inside_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Inside_Nor.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Legs_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Legs_Nor.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Outside_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Outside_Nor_2.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Rest_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Rest_Nor.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Site_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Site_Nor.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Wire_Col.jpg">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="Resources\Textures\Transport Shuttle_fbx\textures\Shuttle_Wire_Nor.jpg">
       <Filter>Fichiers de ressources</Filter>
     </Image>
   </ItemGroup>

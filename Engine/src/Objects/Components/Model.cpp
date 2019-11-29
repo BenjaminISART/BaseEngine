@@ -13,9 +13,12 @@ namespace Objects::Components
 			std::cout << "error loading " << path << std::endl;
 
 		directory = path.substr(0, path.find_last_of('/'));
-		aiNode* node = pScene->mRootNode;
 
-		ProcessNode(node, pScene);
+		if (pScene)
+		{
+			aiNode* node = pScene->mRootNode;
+			ProcessNode(node, pScene);
+		}
 	}
 
 	void Model::SetMesh(aiMesh const* m, int n)
