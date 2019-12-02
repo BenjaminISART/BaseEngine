@@ -45,7 +45,6 @@ namespace Core
 
 	constexpr unsigned int SCREEN_LENGTH = 1600;
 	constexpr unsigned int SCREEN_WIDTH = 900;
-
 }
 
 #define EngineInst Core::Engine::Instance()

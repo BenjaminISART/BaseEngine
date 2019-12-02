@@ -5,7 +5,7 @@
 
 namespace Core
 {
-	class Property abstract
+	class Property
 	{
 	private:
 
@@ -18,7 +18,7 @@ namespace Core
 	public:
 
 		Property() : id{ 0 }, name{ "" } {} // CTOR
-		Property(const char* path) {};
+		Property(const char* path) : id{ 0 }, name{ "" } {};
 		// Property(Property const& c); // CPY CTOR
 		// Property(Property const && c); // MV CTOR
 		~Property() = default; // DTOR
