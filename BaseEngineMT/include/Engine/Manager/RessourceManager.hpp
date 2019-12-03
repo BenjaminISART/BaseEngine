@@ -60,7 +60,11 @@ namespace Core
 
 		Model* FindModel(std::string name)
 		{
-			return &m_loadeds.find(name)->second;
+			if (m_loadeds.find(name) != m_loadeds.end())
+				return &m_loadeds.find(name)->second;
+
+			else
+				return nullptr;
 		}
 
 #pragma endregion
@@ -73,7 +77,7 @@ namespace Core
 		//std::cout << "Request : " << path << std::endl;
 		{
 			std::unique_lock<std::mutex> lock(m_mutex);
-			std::pair<std::future<Model>, std::string> p{ m_threadPool.AddTask([=] { return Model(path); }), name };
+			std::pair<std::future<Model>, std::string> p{ m_threadPool.AddTask([=] { std::this_thread::sleep_for(std::chrono::seconds(3)); return Model(path); }), name };
 			m_requestQueue.emplace(std::move(p));
 		}
 

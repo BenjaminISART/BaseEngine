@@ -25,7 +25,9 @@ public:
 public:
 
 	Object() = default; // CTOR
-	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3)
+	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3) :
+		m_model{nullptr},
+		m_modelReady{false}
 	{
 		m_transform.position = p;
 		m_transform.rotation = r;

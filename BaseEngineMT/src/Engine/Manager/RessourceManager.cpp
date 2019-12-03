@@ -14,7 +14,7 @@ void Core::RessourceManager::CheckRequestQueue()
 
 			while (!m_requestQueue.empty() && m_requestQueue.front().first._Is_ready())
 			{
-				m_loadeds.insert({ m_requestQueue.front().second, std::move(m_requestQueue.front().first.get()) });
+				m_loadeds.insert({ std::move(m_requestQueue.front().second), std::move(m_requestQueue.front().first.get()) });
 				m_requestQueue.pop();
 				std::cout << "Model Loaded" << std::endl;
 			}

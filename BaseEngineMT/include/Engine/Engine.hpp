@@ -41,13 +41,17 @@ namespace Core
 		RessourceManager* GetRessourceManager() { return &m_rm; };
 
 #pragma region public attributes
+		Camera mainCamera;
 #pragma endregion
 
 #pragma region public methods
 		void Run();
+
+		GLFWwindow* GetWindow() {return m_window;}
 #pragma endregion
 
 	};
+
 }
 
 #endif // __ENGINE__

@@ -2,6 +2,7 @@
 #define __RENDERER__
 
 #include "Engine/Structure/Scene.hpp"
+#include "Engine/Object/Camera.hpp"
 #include <vector>
 
 class Renderer
@@ -30,6 +31,8 @@ public:
 	void SetActualScene(int i) { m_actualScene = i; }
 
 	Scene* GetActualScene() { return &m_scene[m_actualScene]; }
+
+	void RendActualScene(unsigned int shaderid);
 #pragma endregion
 };
 

@@ -4,6 +4,7 @@
 #include "Engine/Property/Property.hpp"
 #include "Engine/Property/Mesh.hpp"
 #include <utility>
+#include <iostream>
 #include <atomic>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -83,7 +84,6 @@ namespace Core
 				//											 // now set the sampler to the correct texture unit
 				//	glUniform1i(glGetUniformLocation(s.ID(), ("material." + name + number).c_str()), i);
 				//	// and finally bind the texture
-				//	glBindTexture(GL_TEXTURE_2D, textures[i].m_ID);
 				//}
 
 				// draw mesh

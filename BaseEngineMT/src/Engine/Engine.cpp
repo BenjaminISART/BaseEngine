@@ -1,5 +1,6 @@
 #include "Engine/Engine.hpp"
 #include "Engine/Tools/EngineStructure.hpp"
+#include "Engine/Manager/InputManager.hpp"
 
 
 // tmp
@@ -9,7 +10,8 @@ namespace Core
 {
 	std::unique_ptr<Engine> Engine::m_instance = nullptr;
  
-	Engine::Engine()
+	Engine::Engine() :
+		mainCamera{ ptm::Vec3(0.0f, 0.0f, 0.0f), ptm::Vec3(0.0f, 0.0f, 1000.0f), ptm::Vec3(0.0f, 1.0f, 0.0f) }
 	{
 		glfwInit();
 
@@ -28,7 +30,7 @@ namespace Core
 
 		glfwMakeContextCurrent(m_window);
 		//glfwSetFramebufferSizeCallback(m_window, FramebufferSizeCallback);
-		//glfwSetCursorPosCallback(m_window, Managers::InputManager::MouseCallback);
+		glfwSetCursorPosCallback(m_window, Managers::InputManager::MouseCallback);
 		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		if (!gladLoadGLLoader(GLADloadproc(glfwGetProcAddress)))
@@ -66,7 +68,6 @@ namespace Core
 		Shader s("Resources/Shaders/object.vs", "Resources/Shaders/object.fs");
 		s.Use();
 
-		//SGraph->m_mainCamera = SGraph->FindGameObjectWithScript<Objects::Components::Camera>()->GetComponent<Objects::Components::Camera>();
 
 		// render loop
 		// -----------
@@ -75,10 +76,6 @@ namespace Core
 			// update
 			// ------
 			//Core::UpdateHandler::Instance()->UpdateAll();
-			for (auto& s : m_renderer.GetActualScene()->GetSGraph().m_objects)
-			{
-				s.second.Draw();
-			}
 
 			//m_rm.CheckRequestQueue();
 
@@ -87,6 +84,8 @@ namespace Core
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//Renderer::Render::Instance()->RendScene();
+
+			m_renderer.RendActualScene(s.id);
 
 
 			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

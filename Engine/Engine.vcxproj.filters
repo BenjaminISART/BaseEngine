@@ -33,9 +33,6 @@
     <ClInclude Include="include\Engine\Engine.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="include\Managers\InputManager.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="include\Objects\Components\Shader.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -327,6 +324,9 @@
     <ClInclude Include="include\Objects\Components\Camera.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="include\Managers\InputManager.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -467,7 +467,6 @@
     <None Include="Resources\Model\city.mtl" />
     <None Include="Resources\Model\dragon.3ds" />
     <None Include="Resources\Model\Transport Shuttle_fbx.fbx" />
-    <None Include="assimp-vc140-mtd.dll" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\Engine\ex.txt" />

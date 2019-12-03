@@ -27,25 +27,25 @@
   <GameObject name="benji">
     <Transform>0 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>dragon</Model>
+    <Model>skull1</Model>
   </GameObject>
 
   <GameObject name="benjis">
     <Transform>10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull2</Model>
+    <Model>skull1</Model>
   </GameObject>
 
   <GameObject name="benjiss">
     <Transform>-10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull2</Model>
+    <Model>skull1</Model>
   </GameObject>
 
   <GameObject name="benjiss">
     <Transform>20 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull2</Model>
+    <Model>skull1</Model>
   </GameObject>
 
   <!--<GameObject name="adel">
