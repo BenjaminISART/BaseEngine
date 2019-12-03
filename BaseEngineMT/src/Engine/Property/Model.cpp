@@ -106,7 +106,6 @@ Core::Mesh Core::Model::ProcessMesh(aiMesh* m, const aiScene* s)
 	//	LoadMatTextures(material, aiTextureType_AMBIENT, "texture_height");
 	//textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
-	//ret.SetBuffers();
 	//ret.textures = textures;
 
 	// return a m object created from the extracted m data

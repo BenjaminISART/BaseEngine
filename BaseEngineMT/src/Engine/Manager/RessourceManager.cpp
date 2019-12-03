@@ -12,11 +12,11 @@ void Core::RessourceManager::CheckRequestQueue()
 		{
 			std::unique_lock<std::mutex> lock(m_mutex);
 
-			while (!m_requestQueue.empty() && m_requestQueue.front()._Is_ready())
+			while (!m_requestQueue.empty() && m_requestQueue.front().first._Is_ready())
 			{
-				m_loadeds.emplace_back(std::move(m_requestQueue.front().get()));
+				m_loadeds.insert({ m_requestQueue.front().second, std::move(m_requestQueue.front().first.get()) });
 				m_requestQueue.pop();
-				//std::cout << "on a trouve" << std::endl;
+				std::cout << "Model Loaded" << std::endl;
 			}
 		}
 

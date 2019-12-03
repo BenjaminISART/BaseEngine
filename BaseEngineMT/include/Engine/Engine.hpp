@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 #include "Engine/Manager/SceneLoader.hpp"
 #include "Engine/Manager/RessourceManager.hpp"
+#include "Engine/Manager/Renderer.hpp"
 
 namespace Core
 {
@@ -18,7 +19,8 @@ namespace Core
 		std::mutex m_mutex;
 		static std::unique_ptr<Engine> m_instance;
 
-		RessourceManager m_rm;
+		RessourceManager	m_rm;
+		Renderer			m_renderer;
 
 		GLFWwindow* m_window;
 #pragma endregion

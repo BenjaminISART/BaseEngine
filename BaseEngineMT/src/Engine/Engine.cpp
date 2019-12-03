@@ -2,6 +2,9 @@
 #include "Engine/Tools/EngineStructure.hpp"
 
 
+// tmp
+#include "Engine/Property/Shader.hpp"
+
 namespace Core
 {
 	std::unique_ptr<Engine> Engine::m_instance = nullptr;
@@ -58,7 +61,10 @@ namespace Core
 	{
 		// mainScene load
 		// --------------
-		Core::SceneLoader::LoadScene("Data/Scenes/Scene1.xml");
+		m_renderer.m_scene.push_back(Core::SceneLoader::LoadScene("Data/Scenes/Scene1.xml"));
+
+		Shader s("Resources/Shaders/object.vs", "Resources/Shaders/object.fs");
+		s.Use();
 
 		//SGraph->m_mainCamera = SGraph->FindGameObjectWithScript<Objects::Components::Camera>()->GetComponent<Objects::Components::Camera>();
 
@@ -69,6 +75,10 @@ namespace Core
 			// update
 			// ------
 			//Core::UpdateHandler::Instance()->UpdateAll();
+			for (auto& s : m_renderer.GetActualScene()->GetSGraph().m_objects)
+			{
+				s.second.Draw();
+			}
 
 			//m_rm.CheckRequestQueue();
 

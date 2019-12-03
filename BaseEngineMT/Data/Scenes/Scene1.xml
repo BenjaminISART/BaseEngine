@@ -24,7 +24,7 @@
 
   </Resource>
   
-  <!--<GameObject name="benji">
+  <GameObject name="benji">
     <Transform>0 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
     <Model>dragon</Model>
@@ -48,7 +48,7 @@
     <Model>skull2</Model>
   </GameObject>
 
-  <GameObject name="adel">
+  <!--<GameObject name="adel">
     <Transform>0 0 0 0 0 0 1 1 1</Transform>
     <Shader>object</Shader>
     --><!--<Model>eye</Model>--><!--

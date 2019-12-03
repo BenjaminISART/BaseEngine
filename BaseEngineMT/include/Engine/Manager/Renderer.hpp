@@ -1,14 +1,15 @@
 #ifndef __RENDERER__
 #define __RENDERER__
 
+#include "Engine/Structure/Scene.hpp"
 #include <vector>
 
 class Renderer
 {
-private:
+public:
 
 #pragma region private attributes
-	std::vector<int> m_scene;
+	std::vector<Scene> m_scene;
 	int m_actualScene;
 #pragma endregion
 
@@ -17,15 +18,18 @@ private:
 
 public:
 
-	Renderer() : m_actualScene{0} {} // CTOR
+	Renderer() : m_actualScene{ 0 } {} // CTOR
 	// Renderer(Renderer const& c); // CPY CTOR
 	// Renderer(Renderer const && c); // MV CTOR
-	~Renderer(); // DTOR
+	~Renderer() = default; // DTOR
 
 #pragma region public attributes
 #pragma endregion
 
 #pragma region public methods
+	void SetActualScene(int i) { m_actualScene = i; }
+
+	Scene* GetActualScene() { return &m_scene[m_actualScene]; }
 #pragma endregion
 };
 

@@ -9,6 +9,7 @@
 #include <queue>
 #include <string>
 #include <memory>
+#include <utility>
 #include "Engine/Property/Property.hpp"
 #include "Engine/Property/Model.hpp"
 #include "Engine/Tools/EngineStructure.hpp"
@@ -22,12 +23,12 @@ namespace Core
 
 #pragma region private attributes
 
-		std::queue<std::future<Model>> m_requestQueue;
+		std::queue<std::pair<std::future<Model>, std::string>> m_requestQueue;
 		std::atomic<bool> m_requestQueueEmpty;
 		std::atomic<bool> m_programEnded;
 		std::mutex m_mutex;
 
-		std::vector<Model> m_loadeds;
+		std::unordered_map<std::string, Model> m_loadeds;
 
 		TaskExecution::TaskSystem m_threadPool;
 
@@ -36,10 +37,7 @@ namespace Core
 		//-----------------------------------
 
 #pragma region private methods
-	public:
-
 		void CheckRequestQueue();
-
 #pragma endregion
 
 	public:
@@ -57,27 +55,34 @@ namespace Core
 
 #pragma region public methods
 
-		void RequestLoad(std::string path);
+		void RequestLoad(std::string path, std::string name);
+
+
+		Model* FindModel(std::string name)
+		{
+			return &m_loadeds.find(name)->second;
+		}
 
 #pragma endregion
 	}; // RessourceManager end
 
 
 
-	inline void RessourceManager::RequestLoad(std::string path)
+	inline void RessourceManager::RequestLoad(std::string path, std::string name)
 	{
 		//std::cout << "Request : " << path << std::endl;
 		{
 			std::unique_lock<std::mutex> lock(m_mutex);
-			m_requestQueue.emplace(m_threadPool.AddTask([=] { return Model(path); }));
+			std::pair<std::future<Model>, std::string> p{ m_threadPool.AddTask([=] { return Model(path); }), name };
+			m_requestQueue.emplace(std::move(p));
 		}
 
-		/*if (m_requestQueueEmpty.load())
+		if (m_requestQueueEmpty.load())
 		{
 			std::cout << "Launch Check thread" << std::endl;
 			m_requestQueueEmpty.store(false);
 			m_threadPool.AddTask([this] { this->CheckRequestQueue(); });
-		}*/
+		}
 	}
 
 }

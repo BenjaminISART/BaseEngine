@@ -19,6 +19,8 @@
     <Model name="skull2">Resources/Model/Skull/Gufram_Jolly_Roger_mat(2).obj</Model>
     <Model name="skull3">Resources/Model/Skull/Gufram_Jolly_Roger_mat(3).obj</Model>
     <Model name="skull4">Resources/Model/Skull/Gufram_Jolly_Roger_mat(4).obj</Model>
+    <Model name="cercueil">Resources/Model/cerceuil.fbx</Model>
+    <Model name="chandelier">Resources/Model/chandelier.fbx</Model>
     <!--<Model name="city">Resources/Model/city.obj</Model>-->
 
     <Texture name="white">Resources/Textures/white.jpg</Texture>
@@ -28,13 +30,13 @@
   <GameObject name="benji">
     <Transform>0 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>dragon</Model>
+    <Model>cerceuil</Model>
   </GameObject>
 
   <GameObject name="benjis">
     <Transform>10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull2</Model>
+    <Model>chandelier</Model>
   </GameObject>
 
   <GameObject name="benjiss">
@@ -53,7 +55,7 @@
     <Transform>0 0 0 0 0 0 1 1 1</Transform>
     <Shader>object</Shader>
     <!--<Model>eye</Model>-->
-    <Camera>0 0 0 0 0 10000 0 1 0</Camera>
+    <Camera>0 0 0 0 0 1 0 1 0</Camera>
   </GameObject>
 
 </Scene1>
