@@ -18,9 +18,7 @@ Core::Model::Model(std::string path)
 	m_directoryBis = path;
 	m_directoryBis = (m_directoryBis.substr(0, m_directoryBis.find_last_of('/')));
 
-	std::ostringstream buf;
-	buf << "m_directory : " << m_directoryBis << std::endl;
-	std::cout << buf.str();
+	
 	
 	if (pScene)
 	{

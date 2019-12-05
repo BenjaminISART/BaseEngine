@@ -8,7 +8,7 @@ namespace Objects::Resources
 {
 	Texture::Texture(const std::string& path)
 	{
-		glGenTextures(1, &m_ID);
+		/*glGenTextures(1, &m_ID);
 		glBindTexture(GL_TEXTURE_2D, m_ID);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -31,7 +31,7 @@ namespace Objects::Resources
 			std::cout << "Failed to load texture " << path << std::endl;
 		}
 
-		stbi_image_free(data);
+		stbi_image_free(data);*/
 	}
 
 	void Texture::Use() const

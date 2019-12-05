@@ -19,6 +19,7 @@ void Core::RessourceManager::CheckRequestQueue()
 				std::cout << buf.str();
 				m_loadeds.insert({ std::move(m_requestQueue.front().second), std::move(m_requestQueue.front().first.get()) });
 				m_requestQueue.pop();
+				std::cout << "end\n";
 			}
 		}
 
