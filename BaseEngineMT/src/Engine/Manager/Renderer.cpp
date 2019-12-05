@@ -9,9 +9,9 @@ void Renderer::RendActualScene(unsigned int shaderid)
 		const auto& m = object.second.m_model;
 
 		glUniformMatrix4fv(glGetUniformLocation(shaderid, "TRS"), 1, false, t.m_array);
-		glUniformMatrix4fv(glGetUniformLocation(shaderid, "view"), 1, false, Core::Engine::GetEngine()->mainCamera.cameraMatrix.m_array);
-		glUniformMatrix4fv(glGetUniformLocation(shaderid, "proj"), 1, false, Core::Engine::GetEngine()->mainCamera.projectionMatrix.m_array);
+		glUniformMatrix4fv(glGetUniformLocation(shaderid, "view"), 1, false, Core::Engine::GetEngine()->overviewCamera.cameraMatrix.m_array);
+		glUniformMatrix4fv(glGetUniformLocation(shaderid, "proj"), 1, false, Core::Engine::GetEngine()->overviewCamera.projectionMatrix.m_array);
 
-		object.second.Draw();
+		object.second.Draw(shaderid);
 	}
 }

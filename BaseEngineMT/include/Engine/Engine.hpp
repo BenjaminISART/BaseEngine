@@ -41,7 +41,7 @@ namespace Core
 		RessourceManager* GetRessourceManager() { return &m_rm; };
 
 #pragma region public attributes
-		Camera mainCamera;
+		Camera overviewCamera;
 #pragma endregion
 
 #pragma region public methods

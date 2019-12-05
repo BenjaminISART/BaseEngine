@@ -21,38 +21,38 @@
     <!--<Model name="city">Resources/Model/city.obj</Model>-->
 
     <Texture name="white">Resources/Textures/white.jpg</Texture>
-
   </Resource>
-  
+
   <GameObject name="benji">
     <Transform>0 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull1</Model>
+    <Model>dragon</Model>
   </GameObject>
 
   <GameObject name="benjis">
     <Transform>10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull1</Model>
-  </GameObject>
-
-  <GameObject name="benjiss">
-    <Transform>-10 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
-    <Shader>object</Shader>
-    <Model>skull1</Model>
+    <Model>skull2</Model>
   </GameObject>
 
   <GameObject name="benjiss">
     <Transform>20 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
     <Shader>object</Shader>
-    <Model>skull1</Model>
+    <Model>skull3</Model>
+  </GameObject>
+
+  <GameObject name="benjisss">
+    <Transform>30 0 -20 -1.57 0 0 0.1 0.1 0.1</Transform>
+    <Shader>object</Shader>
+    <Model>skull4</Model>
   </GameObject>
 
   <!--<GameObject name="adel">
     <Transform>0 0 0 0 0 0 1 1 1</Transform>
     <Shader>object</Shader>
-    --><!--<Model>eye</Model>--><!--
+    -->
+  <!--<Model>eye</Model>-->
+  <!--
     <Camera>0 0 0 0 0 10000 0 1 0</Camera>
   </GameObject>-->
-
 </Scene>

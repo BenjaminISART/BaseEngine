@@ -81,8 +81,6 @@ public:
 		// Also re-calculate the Right and Up vector
 		right = (Vec3::Cross(front, 1_Vec3y)).Normal();  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 		up = (Vec3::Cross(right, front)).Normal();
-
-		Update();
 	}
 #pragma endregion
 };

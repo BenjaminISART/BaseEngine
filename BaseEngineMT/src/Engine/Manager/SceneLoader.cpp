@@ -46,7 +46,7 @@ namespace Core
 	{
 		xml_node<>* gO = root_node->first_node("Resource");
 
-		for (xml_node<>* resource = gO->first_node(); resource; resource = resource->next_sibling())
+		for (xml_node<>* resource = gO->first_node(); resource; resource = resource->next_sibling())  
 		{
 			if (strcmp(resource->name(), "Model") == 0)
 				Core::Engine::GetEngine()->GetRessourceManager()->RequestLoad(resource->value(), 

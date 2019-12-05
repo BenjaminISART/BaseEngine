@@ -15,10 +15,10 @@ namespace Objects::Resources
 	public:
 		Texture() = default;
 		Texture(Texture const& t) = default;
-		Texture(const std::string& path);
+		explicit Texture(const std::string& path);
 		~Texture() = default;
 
-		GLuint m_ID;
+		GLuint m_ID{};
 		std::string type;
 		std::string path;
 

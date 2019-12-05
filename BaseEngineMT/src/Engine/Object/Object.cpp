@@ -1,9 +1,10 @@
 #include "Engine/Object/Object.hpp"
 #include "Engine/Engine.hpp"
 
-void Object::Draw()
+#include <sstream>
+
+void Object::Draw(unsigned int s)
 {
-	std::cout << "Object Draw" << std::endl	;
 	if (!m_modelReady)
 	{
 		m_model = Core::Engine::GetEngine()->GetRessourceManager()->FindModel(m_modelName);
@@ -11,11 +12,13 @@ void Object::Draw()
 		if (m_model)
 		{
 			m_modelReady = true;
-			std::cout << "Model Setted" << std::endl;
+			std::ostringstream buf;
+			buf << "Model Setted : " << m_modelName << std::endl;
+			std::cout << buf.str();
 			return;
 		}
 	}
 
 	else
-		m_model->Draw();
+		m_model->Draw(s);
 }

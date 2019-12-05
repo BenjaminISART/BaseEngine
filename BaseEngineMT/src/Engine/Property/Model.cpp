@@ -1,5 +1,6 @@
 #include "Engine/Property/Model.hpp"
 #include <iostream>
+#include <sstream>
 
 
 
@@ -13,8 +14,14 @@ Core::Model::Model(std::string path)
 	if (!pScene || pScene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode)
 		std::cout << "error loading " << path << std::endl;
 
-	m_directory = std::string(path).substr(0, std::string(path).find_last_of('/')).c_str();
+	m_directory = (path.substr(0, path.find_last_of('/')).c_str());
+	m_directoryBis = path;
+	m_directoryBis = (m_directoryBis.substr(0, m_directoryBis.find_last_of('/')));
 
+	std::ostringstream buf;
+	buf << "m_directory : " << m_directoryBis << std::endl;
+	std::cout << buf.str();
+	
 	if (pScene)
 	{
 		aiNode* node = pScene->mRootNode;
@@ -43,7 +50,7 @@ void Core::Model::ProcessNode(aiNode* n, const aiScene* s)
 Core::Mesh Core::Model::ProcessMesh(aiMesh* m, const aiScene* s)
 {
 	Core::Mesh ret;
-	//std::vector<Core::Texture> textures;
+	std::vector<Texture> textures;
 
 	// Walk through each of the mesh's vertices
 	for (unsigned int i = 0; i < m->mNumVertices; i++)
@@ -87,27 +94,60 @@ Core::Mesh Core::Model::ProcessMesh(aiMesh* m, const aiScene* s)
 			ret.index.push_back(face.mIndices[j]);
 	}
 
-	//aiMaterial* material = s->mMaterials[m->mMaterialIndex];
+	aiMaterial* material = s->mMaterials[m->mMaterialIndex];
 
-	////// 1. diffuse maps
-	//std::vector<Core::Texture> diffuseMaps =
-	//	LoadMatTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-	//textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-	////// 2. specular maps
-	//std::vector<Core::Texture> specularMaps =
-	//	LoadMatTextures(material, aiTextureType_SPECULAR, "texture_specular");
-	//textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-	////// 3. normal maps
-	//std::vector<Core::Texture> normalMaps =
-	//	LoadMatTextures(material, aiTextureType_HEIGHT, "texture_normal");
-	//textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-	////// 4. height maps
-	//std::vector<Core::Texture> heightMaps =
-	//	LoadMatTextures(material, aiTextureType_AMBIENT, "texture_height");
-	//textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+	//// 1. diffuse maps
+	std::vector<Texture> diffuseMaps =
+		LoadMatTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+	textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+	//// 2. specular maps
+	std::vector<Texture> specularMaps =
+		LoadMatTextures(material, aiTextureType_SPECULAR, "texture_specular");
+	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+	//// 3. normal maps
+	std::vector<Texture> normalMaps =
+		LoadMatTextures(material, aiTextureType_HEIGHT, "texture_normal");
+	textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+	//// 4. height maps
+	std::vector<Texture> heightMaps =
+		LoadMatTextures(material, aiTextureType_AMBIENT, "texture_height");
+	textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
-	//ret.textures = textures;
+	ret.textures = textures;
 
 	// return a m object created from the extracted m data
 	return ret;
+}
+
+
+
+std::vector<Texture> Core::Model::LoadMatTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName)
+{
+	std::vector<Texture> textures;
+	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+	{
+		aiString str;
+		mat->GetTexture(type, i, &str);
+
+		bool skip = false;
+		for (auto& texture : m_textures)
+		{
+			if (std::strcmp(texture.path.data(), str.C_Str()) == 0)
+			{
+				textures.push_back(texture);
+				skip = true;
+				break;
+			}
+		}
+		
+		if (!skip)
+		{
+			Texture texture(m_directoryBis + "/" + str.C_Str());
+			texture.type = typeName;
+			//texture.path = str.C_Str();
+			textures.push_back(texture);
+			m_textures.push_back(texture);
+		}
+	}
+	return textures;
 }

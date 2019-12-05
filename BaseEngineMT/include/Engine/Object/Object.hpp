@@ -3,6 +3,7 @@
 
 #include "Engine/Property/Model.hpp"
 #include "Engine/Property/Transform.hpp"
+#include "Engine/Property/Shader.hpp"
 #include "Engine/Maths/Vec3.hpp"
 
 using namespace ptm;
@@ -50,7 +51,7 @@ public:
 		m_transform.UpdateMatrix();
 	}
 
-	void Draw();
+	void Draw(unsigned int s);
 #pragma endregion
 };
 

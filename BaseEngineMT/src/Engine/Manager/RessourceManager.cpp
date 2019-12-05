@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-
+#include <sstream>
 
 void Core::RessourceManager::CheckRequestQueue()
 {
@@ -14,9 +14,11 @@ void Core::RessourceManager::CheckRequestQueue()
 
 			while (!m_requestQueue.empty() && m_requestQueue.front().first._Is_ready())
 			{
+				std::ostringstream buf;
+				buf << "Model Loaded -> " << m_requestQueue.front().second << std::endl;
+				std::cout << buf.str();
 				m_loadeds.insert({ std::move(m_requestQueue.front().second), std::move(m_requestQueue.front().first.get()) });
 				m_requestQueue.pop();
-				std::cout << "Model Loaded" << std::endl;
 			}
 		}
 

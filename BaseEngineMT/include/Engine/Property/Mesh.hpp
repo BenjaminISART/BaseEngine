@@ -2,6 +2,7 @@
 #define __MESH__
 
 #include "Engine/Property/Property.hpp"
+#include "Engine/Property/Texture.hpp"
 #include <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -12,6 +13,7 @@ namespace Core
 	{
 		std::vector<float> vertex;
 		std::vector<unsigned int> index;
+		std::vector<Texture> textures;
 
 		GLuint VAO;
 		GLuint VBO;

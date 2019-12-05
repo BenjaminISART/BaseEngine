@@ -74,12 +74,10 @@ namespace Core
 
 	inline void RessourceManager::RequestLoad(std::string path, std::string name)
 	{
-		//std::cout << "Request : " << path << std::endl;
-		{
-			std::unique_lock<std::mutex> lock(m_mutex);
-			std::pair<std::future<Model>, std::string> p{ m_threadPool.AddTask([=] { std::this_thread::sleep_for(std::chrono::seconds(3)); return Model(path); }), name };
-			m_requestQueue.emplace(std::move(p));
-		}
+	#if 1
+		std::pair<std::future<Model>, std::string>		p{ m_threadPool.AddTask([=] { return Model(path); }), std::move(name) };
+
+		m_requestQueue.emplace(std::move(p));
 
 		if (m_requestQueueEmpty.load())
 		{
@@ -87,6 +85,13 @@ namespace Core
 			m_requestQueueEmpty.store(false);
 			m_threadPool.AddTask([this] { this->CheckRequestQueue(); });
 		}
+
+	#else
+
+		m_loadeds.insert({name, Model(path)});
+		std::cout << "Non MT Loaded Ressource : " << name << std::endl;
+
+	#endif
 	}
 
 }

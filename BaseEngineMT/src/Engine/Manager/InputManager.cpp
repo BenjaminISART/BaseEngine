@@ -84,6 +84,6 @@ namespace Managers
 		m_lastX = float(xpos);
 		m_lastY = float(ypos);
 
-		Core::Engine::GetEngine()->mainCamera.ProcessMouseMovement(xoffset, yoffset);
+		Core::Engine::GetEngine()->overviewCamera.ProcessMouseMovement(xoffset, yoffset);
 	}
 }

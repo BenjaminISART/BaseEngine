@@ -11,7 +11,7 @@ namespace Core
 	std::unique_ptr<Engine> Engine::m_instance = nullptr;
  
 	Engine::Engine() :
-		mainCamera{ ptm::Vec3(0.0f, 0.0f, 0.0f), ptm::Vec3(0.0f, 0.0f, 1000.0f), ptm::Vec3(0.0f, 1.0f, 0.0f) }
+		overviewCamera{ ptm::Vec3(0.0f, 0.0f, 0.0f), ptm::Vec3(0.0f, 0.0f, 1000.0f), ptm::Vec3(0.0f, 1.0f, 0.0f) }
 	{
 		glfwInit();
 
@@ -68,7 +68,8 @@ namespace Core
 		Shader s("Resources/Shaders/object.vs", "Resources/Shaders/object.fs");
 		s.Use();
 
-
+		overviewCamera.ProcessMouseMovement(0.0f, 0.0f);
+		
 		// render loop
 		// -----------
 		while (!glfwWindowShouldClose(m_window))
@@ -85,6 +86,7 @@ namespace Core
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//Renderer::Render::Instance()->RendScene();
 
+			overviewCamera.Update();
 			m_renderer.RendActualScene(s.id);
 
 
