@@ -21,8 +21,8 @@ namespace Core
 	public:
 
 		EngineStructure() {}; // CTOR
-		// EngineStructure(EngineStructure const& c); // CPY CTOR
-		// EngineStructure(EngineStructure const && c); // MV CTOR
+		EngineStructure(EngineStructure const& c) = delete; // CPY CTOR
+		EngineStructure(EngineStructure&& c) = delete; // MV CTOR
 		virtual ~EngineStructure() {}; // DTOR
 
 #pragma region public attributes

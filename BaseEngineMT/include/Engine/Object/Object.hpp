@@ -24,8 +24,8 @@ public:
 
 	Object() = default; // CTOR
 	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3);
-	// Object(Object const& c); // CPY CTOR
-	// Object(Object const && c); // MV CTOR
+	Object(Object const& c) = default; // CPY CTOR
+	Object(Object&& c) = default; // MV CTOR
 	~Object() = default; // DTOR
 
 #pragma region public attributes

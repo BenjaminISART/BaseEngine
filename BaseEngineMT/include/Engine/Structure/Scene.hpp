@@ -17,8 +17,8 @@ private:
 public:
 
 	Scene() = default; // CTOR
-	// Scene(Scene const& c); // CPY CTOR
-	// Scene(Scene const && c); // MV CTOR
+	Scene(Scene const& c) = default; // CPY CTOR
+	Scene(Scene&& c) = default; // MV CTOR
 	~Scene() = default; // DTOR
 
 #pragma region public attributes

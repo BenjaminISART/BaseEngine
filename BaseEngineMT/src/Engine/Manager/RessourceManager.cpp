@@ -9,6 +9,8 @@ void Core::RessourceManager::CheckRequestQueue()
 {
 	while (!m_requestQueueEmpty.load() && !m_programEnded.load())
 	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+
 		{
 			std::unique_lock<std::mutex> lock(m_mutex);
 

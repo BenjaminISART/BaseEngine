@@ -22,8 +22,8 @@ private:
 public:
 
 	SceneGraph() = default; // CTOR
-	// SceneGraph(SceneGraph const& c); // CPY CTOR
-	// SceneGraph(SceneGraph const && c); // MV CTOR
+	SceneGraph(SceneGraph const& c) = default; // CPY CTOR
+	SceneGraph(SceneGraph&& c) = default; // MV CTOR
 	~SceneGraph() = default; // DTOR
 
 #pragma region public attributes

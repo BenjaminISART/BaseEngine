@@ -22,8 +22,8 @@ public:
 
 	Shader() = default; // CTOR
 	Shader(std::string vs, std::string fs); // CTOR
-	// Shader(Shader const& c); // CPY CTOR
-	// Shader(Shader const && c); // MV CTOR
+	Shader(Shader const& c) = default; // CPY CTOR
+	Shader(Shader&& c) = default; // MV CTOR
 	~Shader() = default; // DTOR
 
 #pragma region public attributes

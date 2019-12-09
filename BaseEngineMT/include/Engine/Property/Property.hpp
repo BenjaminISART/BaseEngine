@@ -19,8 +19,9 @@ namespace Core
 
 		Property() : id{ 0 }, name{ "" } {} // CTOR
 		Property(const char* path) : id{ 0 }, name{ "" } {};
-		// Property(Property const& c); // CPY CTOR
-		// Property(Property const && c); // MV CTOR
+		//// TODO : pas mettre default ici parce qu'il faut change les id etc ...
+		//Property(Property const& c) = default; // CPY CTOR
+		//Property(Property && c) = default; // MV CTOR
 		~Property() = default; // DTOR
 
 #pragma region public attributes

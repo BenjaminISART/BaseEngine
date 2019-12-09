@@ -1,10 +1,9 @@
 #include "RessourceManager.hpp"
 
-
-
 inline void Core::RessourceManager::RequestLoad(std::string path, std::string name)
 {
-#if 1
+#ifdef MTLOAD
+
 	std::pair<std::future<Model>, std::string>		p{ m_threadPool.AddTask([=] { return Model(path); }), std::move(name) };
 
 	m_requestQueue.emplace(std::move(p));

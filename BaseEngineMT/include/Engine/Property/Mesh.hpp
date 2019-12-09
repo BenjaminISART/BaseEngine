@@ -45,6 +45,9 @@ namespace Core
 		void Draw(/*objects::Components::Shader s*/) {};
 
 		Mesh() : VAO{ 0 }, VBO{ 0 }, EBO{ 0 } {}
+		Mesh(Mesh const& m) = default;
+		Mesh(Mesh&& m) = default;
+		~Mesh() = default;
 	};
 }
 

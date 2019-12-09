@@ -26,9 +26,8 @@ public:
 
 	Camera() = default; // CTOR
 	Camera(ptm::Vec3 _position, ptm::Vec3 _target, ptm::Vec3 _up); // CTOR
-
-	// Camera(Camera const& c); // CPY CTOR
-	// Camera(Camera const && c); // MV CTOR
+	Camera(Camera const& c) = default; // CPY CTOR
+	Camera(Camera&& c) = default; // MV CTOR
 	~Camera() = default; // DTOR
 
 #pragma region public attributes

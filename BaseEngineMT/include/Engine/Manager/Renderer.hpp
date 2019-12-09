@@ -20,8 +20,8 @@ private:
 public:
 
 	Renderer() : m_actualScene{ 0 } {} // CTOR
-	// Renderer(Renderer const& c); // CPY CTOR
-	// Renderer(Renderer const && c); // MV CTOR
+	Renderer(Renderer const& c) = delete; // CPY CTOR
+	Renderer(Renderer&& c) = delete; // MV CTOR
 	~Renderer() = default; // DTOR
 
 #pragma region public attributes

@@ -38,9 +38,12 @@ namespace Core
 
 		Model() : m_directory {nullptr} {}; // CTOR
 		Model(std::string path);
-		// Model(Model const& c); // CPY CTOR
-		// Model(Model const && c); // MV CTOR
+		Model(Model const& c) = default; // CPY CTOR
+		Model(Model&& c) = default; // MV CTOR
 		~Model() = default; // DTOR
+
+		Model& operator=(Model const& t) = default;
+		Model& operator=(Model&& t) = default;
 
 #pragma region public attributes
 #pragma endregion

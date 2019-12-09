@@ -18,9 +18,10 @@ namespace Core
 		static void LoadGameObjects(Scene* s, xml_node<>*);
 
 	public:
-		SceneLoader() = delete;
-		SceneLoader(SceneLoader const& s) = delete;
-		~SceneLoader() = default;
+		SceneLoader() = delete; // CTOR
+		SceneLoader(SceneLoader const& s) = delete; // CPY CTOR
+		SceneLoader(SceneLoader&& s) = delete; // MV CTOR
+		~SceneLoader() = default; // DTOR
 
 		static Scene LoadScene(const std::string& s);
 	};

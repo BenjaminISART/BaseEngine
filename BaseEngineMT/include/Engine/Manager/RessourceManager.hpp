@@ -44,8 +44,8 @@ namespace Core
 
 		RessourceManager() : m_requestQueueEmpty{ true }, m_programEnded{false}, m_threadPool{ 20 } {}; // CTOR
 		explicit RessourceManager(size_t nbThread) : m_requestQueueEmpty{ true }, m_programEnded{ false }, m_threadPool{nbThread} {}; // CTOR
-		// RessourceManager(RessourceManager const& c); // CPY CTOR
-		// RessourceManager(RessourceManager const && c); // MV CTOR
+		RessourceManager(RessourceManager const& c) = delete; // CPY CTOR
+		RessourceManager(RessourceManager&& c) = delete; // MV CTOR
 		~RessourceManager() {}; // DTOR
 
 #pragma region public attributes

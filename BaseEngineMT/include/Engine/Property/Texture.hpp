@@ -29,9 +29,12 @@ public:
 
 	Texture() = default; // CTOR
 	Texture(const std::string& _path); // CTOR
-	// Texture(Texture const& c); // CPY CTOR
-	// Texture(Texture const && c); // MV CTOR
+	Texture(Texture const& c) = default; // CPY CTOR
+	Texture(Texture&& c) = default; // MV CTOR
 	~Texture() = default; // DTOR
+
+	Texture& operator=(Texture const& t) = default;
+	Texture& operator=(Texture&& t) = default;
 
 #pragma region public attributes
 	GLuint id;

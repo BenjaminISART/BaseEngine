@@ -20,8 +20,8 @@ private:
 public:
 
 	Transform(); // CTOR
-	// Transform(Transform const& c); // CPY CTOR
-	// Transform(Transform const && c); // MV CTOR
+	Transform(Transform const& c) = default; // CPY CTOR
+	Transform(Transform&& c) = default; // MV CTOR
 	~Transform() = default; // DTOR
 
 #pragma region public attributes
