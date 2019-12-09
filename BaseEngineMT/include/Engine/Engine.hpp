@@ -12,6 +12,7 @@
 #include "Engine/Manager/SceneLoader.hpp"
 #include "Engine/Manager/RessourceManager.hpp"
 #include "Engine/Manager/Renderer.hpp"
+#include "Engine/Manager/GuiManager.hpp"
 
 namespace Core
 {
@@ -25,7 +26,8 @@ namespace Core
 
 		RessourceManager	m_rm;
 		Renderer			m_renderer;
-
+		GuiManager			m_guiManager
+;
 		GLFWwindow* m_window;
 #pragma endregion
 
@@ -51,16 +53,16 @@ namespace Core
 		~Engine() {}; // DTOR
 
 
-		RessourceManager* GetRessourceManager() { return &m_rm; };
-
 #pragma region public attributes
 		Camera overviewCamera;
 #pragma endregion
 
-#pragma region public methods
+#pragma region public methods 
 		void Run();
 
-		GLFWwindow* GetWindow() {return m_window;}
+		GLFWwindow* GetWindow() { return m_window; }
+		Renderer* GetRenderer() { return &m_renderer; }
+		RessourceManager* GetRessourceManager() { return &m_rm; }
 #pragma endregion
 
 	};

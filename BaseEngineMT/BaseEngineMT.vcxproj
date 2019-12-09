@@ -140,6 +140,7 @@
     <ClCompile Include="include\ExtraLibs\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="include\ExtraLibs\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="include\ExtraLibs\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\Engine\Manager\GuiManager.cpp" />
     <ClCompile Include="src\Engine\Manager\InputManager.cpp" />
     <ClCompile Include="src\Engine\Manager\Renderer.cpp" />
     <ClCompile Include="src\Engine\Manager\RessourceManager.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\Engine.hpp" />
+    <ClInclude Include="include\Engine\Manager\GuiManager.hpp" />
     <ClInclude Include="include\Engine\Manager\InputManager.hpp" />
     <ClInclude Include="include\Engine\Manager\Renderer.hpp" />
     <ClInclude Include="include\Engine\Manager\RessourceManager.hpp" />
