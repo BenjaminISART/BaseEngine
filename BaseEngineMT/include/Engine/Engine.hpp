@@ -38,6 +38,7 @@ namespace Core
 			// make sure the viewport matches the new window dimensions; note that width and 
 			// height will be significantly larger than specified on retina displays.
 			glViewport(0, 0, width, height);
+			GetEngine()->overviewCamera.UpdateProjectionMatrix(width, height);
 		}
 		
 #pragma endregion

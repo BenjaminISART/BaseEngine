@@ -101,16 +101,54 @@ namespace Core
 			m_renderer.RendActualScene(s.id);
 			
 			{
-				ImGui::Begin("Scene");                          // Create a window called "Hello, world!" and append into it.
-				for (auto& s : *m_renderer.GetActualScene()->GetSGraph().GetObjects())
+				ImGui::Begin("Scene");
+				for (auto& object : *m_renderer.GetActualScene()->GetSGraph().GetObjects())
 				{
-					ImGui::Text(s.first.c_str());
+					ImGui::SetWindowPos({0,0});
 
-					ImGui::SliderFloat(std::string(s.first + "pos x").c_str(), &s.second.transform.position.x, -100.0f, 100.0f);
-					ImGui::SliderFloat(std::string(s.first + "pos y").c_str(), &s.second.transform.position.y, -100.0f, 100.0f);
-					ImGui::SliderFloat(std::string(s.first + "pos z").c_str(), &s.second.transform.position.z, -100.0f, 100.0f);
+					if (ImGui::BeginMenu(std::string(object.first + " :").c_str()))
+					{
+						ImGui::InputFloat(std::string(object.first + " pos x").c_str(), &object.second.transform.position.x); ImGui::SameLine();
+						ImGui::InputFloat(std::string(object.first + " pos y").c_str(), &object.second.transform.position.y); ImGui::SameLine();
+						ImGui::InputFloat(std::string(object.first + " pos z").c_str(), &object.second.transform.position.z);
+						ImGui::SliderFloat(std::string(object.first + "pos x").c_str(), &object.second.transform.position.x, -100.0f, 100.0f);
+						ImGui::SliderFloat(std::string(object.first + "pos y").c_str(), &object.second.transform.position.y, -100.0f, 100.0f);
+						ImGui::SliderFloat(std::string(object.first + "pos z").c_str(), &object.second.transform.position.z, -100.0f, 100.0f);
+						ImGui::EndMenu();
+					}
 
-					s.second.transform.UpdateMatrix();
+					object.second.transform.UpdateMatrix();
+				}
+				ImGui::End();
+
+				ImGui::Begin("Ressource Manager");
+				for (auto& model : *m_rm.GetLoadedsModel())
+				{
+					if (ImGui::BeginMenu(std::string(model.first + " :").c_str()))
+					{
+						ImGui::Text("path : "); ImGui::SameLine();
+						ImGui::Text(model.second.GetPath());
+						ImGui::EndMenu();
+					}
+				}
+
+				ImGui::Separator();
+
+				if (ImGui::BeginMenu("Load Model"))
+				{
+					static char path[80] = {};
+					static char name[80] = {};
+
+					ImGui::InputText("name", name, 80);
+					ImGui::InputText("path", path, 80);
+
+					if (ImGui::Button("Confirm", {100, 20}))
+					{
+						std::cout << "run time load : " << path << std::endl;
+						m_rm.RequestLoad(std::string(path), std::string(name));
+					}
+					
+					ImGui::EndMenu();
 				}
 				ImGui::End();
 				

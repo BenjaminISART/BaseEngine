@@ -22,6 +22,7 @@ namespace Core
 #pragma region private attributes
 		const char* m_directory;
 		std::string m_directoryBis;
+		std::string m_fullpath;
 
 		std::vector<std::pair<Core::Mesh, bool>> m_mesh;
 		std::vector<Texture> m_textures;
@@ -52,6 +53,8 @@ namespace Core
 		void BindMeshs();
 
 		void Draw(unsigned int s);
+
+		const char* GetPath() const { return m_fullpath.c_str(); }
 #pragma endregion
 	};
 }

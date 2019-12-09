@@ -14,8 +14,7 @@ Core::Model::Model(std::string path)
 	if (!pScene || pScene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode)
 		std::cout << "error loading " << path << std::endl;
 
-	m_directory = (path.substr(0, path.find_last_of('/')).c_str());
-	m_directoryBis = path;
+	m_directoryBis = m_fullpath = path;
 	m_directoryBis = (m_directoryBis.substr(0, m_directoryBis.find_last_of('/')));
 
 	

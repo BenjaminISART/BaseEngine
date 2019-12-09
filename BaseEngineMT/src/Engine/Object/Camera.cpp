@@ -6,9 +6,9 @@ using namespace ptm;
 
 
 Camera::Camera(ptm::Vec3 _position, ptm::Vec3 _target, ptm::Vec3 _up) :
-	position{ _position },
-	target{ _target },
-	up{ _up }
+	m_position{ _position },
+	m_target{ _target },
+	m_up{ _up }
 {
 	cameraMatrix = ptm::Mat4_utils::LookAt(_position, _position + _target, _up);
 
@@ -20,40 +20,43 @@ Camera::Camera(ptm::Vec3 _position, ptm::Vec3 _target, ptm::Vec3 _up) :
 void Camera::Update()
 {
 	if (Input->IsPressingKey(GLFW_KEY_W))
-		position += target * 0.05f;
+		m_position += m_target * 0.05f;
 	if (Input->IsPressingKey(GLFW_KEY_S))
-		position -= target * 0.05f;
+		m_position -= m_target * 0.05f;
 	if (Input->IsPressingKey(GLFW_KEY_D))
-		position += right * 0.05f;
+		m_position += m_right * 0.05f;
 	if (Input->IsPressingKey(GLFW_KEY_A))
-		position += -right * 0.05f;
+		m_position += -m_right * 0.05f;
 
-	cameraMatrix = Mat4_utils::LookAt(position, position + target, up);
+	cameraMatrix = Mat4_utils::LookAt(m_position, m_position + m_target, m_up);
 }
 
 
 
 void Camera::ProcessMouseMovement(float x, float y)
 {
-	if (glfwGetMouseButton(Core::Engine::GetEngine()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	if (glfwGetMouseButton(Core::Engine::GetEngine()->GetWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS || m_firstProcess)
 	{
 		x *= 0.05f;
 		y *= 0.05f;
 
-		Yaw += x;
-		Pitch += y;
+		m_Yaw += x;
+		m_Pitch += y;
 
-		if (Pitch > 89.0f)
-			Pitch = 89.0f;
-		if (Pitch < -89.0f)
-			Pitch = -89.0f;
+		if (m_Pitch > 89.0f)
+			m_Pitch = 89.0f;
+		if (m_Pitch < -89.0f)
+			m_Pitch = -89.0f;
 
 		ptm::Vec3 front;
-		front.x = cos(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
-		front.y = sin(ptm::RAD(Pitch));
-		front.z = sin(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
-		target = front.Normal();
-		right = (Vec3::Cross(front, 1_Vec3y)).Normal();
-		up = (Vec3::Cross(right, front)).Normal();
+		front.x = cos(ptm::RAD(m_Yaw)) * cos(ptm::RAD(m_Pitch));
+		front.y = sin(ptm::RAD(m_Pitch));
+		front.z = sin(ptm::RAD(m_Yaw)) * cos(ptm::RAD(m_Pitch));
+		m_target = front.Normal();
+		m_right = (Vec3::Cross(front, 1_Vec3y)).Normal();
+		m_up = (Vec3::Cross(m_right, front)).Normal();
+
+		if (m_firstProcess)
+			m_firstProcess = false;
 	}
 }

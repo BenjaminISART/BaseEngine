@@ -57,8 +57,9 @@ namespace Core
 
 		void RequestLoad(std::string path, std::string name);
 
-
 		Model* FindModel(std::string name);
+
+		std::unordered_map<std::string, Model>* GetLoadedsModel() { return &m_loadeds; }
 
 #pragma endregion
 	};
