@@ -24,8 +24,8 @@ namespace Managers
 
 	public:
 
-		 InputManager(InputManager const& c) = delete; // CPY CTOR
-		 InputManager(InputManager&& c) = delete; // MV CTOR
+		InputManager(InputManager const& c) = delete; // CPY CTOR
+		InputManager(InputManager&& c) = delete; // MV CTOR
 		~InputManager();
 
 		[[nodiscard]]

@@ -134,6 +134,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\ExtraLibs\imgui\imgui.cpp" />
+    <ClCompile Include="include\ExtraLibs\imgui\imgui_demo.cpp" />
+    <ClCompile Include="include\ExtraLibs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\ExtraLibs\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="include\ExtraLibs\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Engine\Manager\InputManager.cpp" />
     <ClCompile Include="src\Engine\Manager\Renderer.cpp" />
     <ClCompile Include="src\Engine\Manager\RessourceManager.cpp" />
@@ -175,6 +180,13 @@
     <ClInclude Include="include\Engine\Tools\EngineStructure.hpp" />
     <ClInclude Include="include\Engine\Tools\TaskSystem.hpp" />
     <ClInclude Include="include\Engine\Property\Mesh.hpp" />
+    <ClInclude Include="include\ExtraLibs\imgui\imconfig.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imgui.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imgui_internal.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imstb_rectpack.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imstb_textedit.h" />
+    <ClInclude Include="include\ExtraLibs\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Data\Scenes\Scene1.xml" />
