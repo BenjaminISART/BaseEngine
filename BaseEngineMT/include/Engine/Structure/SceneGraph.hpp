@@ -40,6 +40,11 @@ public:
 		m_objects.insert({ name, std::move(o) });
 	}
 
+	void RemoveObject(std::string name)
+	{
+		m_objects.erase(name);
+	}
+
 	std::unordered_map<std::string, Object>* GetObjects() { return &m_objects; }
 #pragma endregion
 };

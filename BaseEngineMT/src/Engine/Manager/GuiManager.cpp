@@ -34,6 +34,7 @@ void GuiManager::SetViewPort()
 
 	Core::Engine* eng = Core::Engine::GetEngine();
 
+	ImGui::Separator();
 	for (auto& object : *eng->GetRenderer()->GetActualScene()->GetSGraph().GetObjects())
 	{
 
@@ -79,6 +80,23 @@ void GuiManager::SetViewPort()
 			Object toAdd;
 			toAdd.SetModelName(std::string(mod));
 			eng->GetRenderer()->GetActualScene()->GetSGraph().AddObject(std::string(nam), toAdd);
+		}
+
+		ImGui::EndMenu();
+	}
+
+	ImGui::Separator();
+
+	if (ImGui::BeginMenu("Remove Object"))
+	{
+		static char nameToDelete[80] = {};
+
+		ImGui::InputText("name", nameToDelete, 80);
+
+		if (ImGui::Button("Confirm", { 100, 20 }))
+		{
+			std::cout << "Delete Object : " << nameToDelete << std::endl;
+			eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(std::string(nameToDelete));
 		}
 
 		ImGui::EndMenu();
