@@ -10,7 +10,7 @@
 
 class Texture
 {
-public:
+private:
 
 #pragma region private attributes
 	unsigned char* m_data;
@@ -27,10 +27,8 @@ public:
 
 public:
 
-	Texture() = default;
-	Texture(const std::string& _path);
-
-	// CTOR
+	Texture() = default; // CTOR
+	Texture(const std::string& _path); // CTOR
 	// Texture(Texture const& c); // CPY CTOR
 	// Texture(Texture const && c); // MV CTOR
 	~Texture() = default; // DTOR
@@ -42,14 +40,8 @@ public:
 #pragma endregion
 
 #pragma region public methods
-	void Use()
-	{
-		if(!m_binded)
-			Bind();
-		
-		glBindTexture(GL_TEXTURE_2D, id);
-	}
 
+	void Use();
 
 #pragma endregion
 };

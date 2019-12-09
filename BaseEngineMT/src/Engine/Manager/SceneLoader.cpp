@@ -64,7 +64,7 @@ namespace Core
 		{
 			if (strcmp(std::string(script->name()).c_str(), "Model") == 0)
 			{
-				toAdd.m_modelName = script->value();
+				toAdd.SetModelName(script->value());
 			}
 
 			if (strcmp(script->name(), "Transform") == 0)
@@ -83,39 +83,11 @@ namespace Core
 				sstr >> s.y;
 				sstr >> s.z;
 
-				toAdd.m_transform.position = { t.x, t.y, t.z };
-				toAdd.m_transform.rotation = { r.x, r.y, r.z };
-				toAdd.m_transform.scale = { s.x, s.y, s.z };
-				toAdd.m_transform.UpdateMatrix();
+				toAdd.SetTransform({ t.x, t.y, t.z }, { r.x, r.y, r.z }, { s.x, s.y, s.z });
 			}
 		}
 
 		s->GetSGraph().AddObject(gO->first_attribute("name")->value(), toAdd);
 	}
-
-	/*void SceneLoader::LoadShader(xml_node<>* shader)
-	{
-		const std::string vs = shader->first_node("vertex")->value();
-		const std::string fs = shader->first_node("fragment")->value();
-
-		RManager->AddShader(shader->first_attribute("name")->value(), vs, fs);
-		std::cout << "added shader " << shader->first_attribute("name")->value() << std::endl;
-	}
-
-	void SceneLoader::LoadTexture(xml_node<>* texture)
-	{
-		const std::string path = texture->value();
-
-		RManager->AddTexture(texture->first_attribute("name")->value(), path);
-		std::cout << "added texture " << texture->first_attribute("name")->value() << std::endl;
-	}
-
-	void SceneLoader::LoadModel(xml_node<>* model)
-	{
-		const std::string path = model->value();
-
-		RManager->AddModel(model->first_attribute("name")->value(), path);
-		std::cout << "added model " << model->first_attribute("name")->value() << std::endl;
-	}*/
 }
 

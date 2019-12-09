@@ -10,7 +10,7 @@ using namespace ptm;
 
 class SceneGraph
 {
-public:
+private:
 
 #pragma region private attributes
 	std::unordered_map<std::string, Object> m_objects;
@@ -26,9 +26,6 @@ public:
 	// SceneGraph(SceneGraph const && c); // MV CTOR
 	~SceneGraph() = default; // DTOR
 
-	friend class Engine;
-	friend class Renderer;
-
 #pragma region public attributes
 #pragma endregion
 
@@ -42,6 +39,8 @@ public:
 	{
 		m_objects.insert({ name, std::move(o) });
 	}
+
+	std::unordered_map<std::string, Object>* GetObjects() { return &m_objects; }
 #pragma endregion
 };
 

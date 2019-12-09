@@ -10,14 +10,11 @@ using namespace ptm;
 
 class Object
 {
-public:
+private:
 
 #pragma region private attributes
-	Core::Model*	m_model;
 	std::string		m_modelName;
 	bool			m_modelReady;
-
-	Transform m_transform;
 #pragma endregion
 
 #pragma region private methods
@@ -26,30 +23,21 @@ public:
 public:
 
 	Object() = default; // CTOR
-	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3) :
-		m_model{nullptr},
-		m_modelReady{false}
-	{
-		m_transform.position = p;
-		m_transform.rotation = r;
-		m_transform.scale = s;
-		m_transform.UpdateMatrix();
-	}
+	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3);
 	// Object(Object const& c); // CPY CTOR
 	// Object(Object const && c); // MV CTOR
 	~Object() = default; // DTOR
 
 #pragma region public attributes
+	Core::Model* model;
+
+	Transform transform;
 #pragma endregion
 
 #pragma region public methods
-	void SetTransform(Vec3 p, Vec3 r, Vec3 s)
-	{
-		m_transform.position = p;
-		m_transform.rotation = r;
-		m_transform.scale = s;
-		m_transform.UpdateMatrix();
-	}
+	void SetTransform(Vec3 p, Vec3 r, Vec3 s);
+
+	void SetModelName(const std::string& newName) { m_modelName = newName; }
 
 	void Draw(unsigned int s);
 #pragma endregion

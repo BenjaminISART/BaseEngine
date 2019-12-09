@@ -27,3 +27,14 @@ void Core::RessourceManager::CheckRequestQueue()
 			m_requestQueueEmpty.store(true);
 	}
 }
+
+
+
+Core::Model* Core::RessourceManager::FindModel(std::string name)
+{
+	if (m_loadeds.find(name) != m_loadeds.end())
+		return &m_loadeds.find(name)->second;
+
+	else
+		return nullptr;
+}

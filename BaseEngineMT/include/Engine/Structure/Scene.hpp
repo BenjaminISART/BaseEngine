@@ -5,10 +5,6 @@
 
 class Scene
 {
-	friend class Engine;
-	friend class Renderer;
-	friend class SceneLoader;
-
 private:
 
 #pragma region private attributes

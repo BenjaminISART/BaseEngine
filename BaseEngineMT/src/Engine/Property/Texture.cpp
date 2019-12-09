@@ -22,13 +22,25 @@ void Texture::Bind()
 	if (m_data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_data);
+#ifdef MIPMAP
 		glGenerateMipmap(GL_TEXTURE_2D);
+#endif
 	}
 	else
 		std::cout << "Failed to load texture " << path << std::endl;
 
 	FreeImage();
 	m_binded = true;
+}
+
+
+
+void Texture::Use()
+{
+	if (!m_binded)
+		Bind();
+
+	glBindTexture(GL_TEXTURE_2D, id);
 }
 
 

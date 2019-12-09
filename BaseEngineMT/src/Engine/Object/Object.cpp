@@ -3,13 +3,24 @@
 
 #include <sstream>
 
+
+
+Object::Object(Vec3 p, Vec3 r, Vec3 s) :
+	model{ nullptr },
+	m_modelReady{ false }
+{
+	SetTransform(p, r, s);
+}
+
+
+
 void Object::Draw(unsigned int s)
 {
 	if (!m_modelReady)
 	{
-		m_model = Core::Engine::GetEngine()->GetRessourceManager()->FindModel(m_modelName);
+		model = Core::Engine::GetEngine()->GetRessourceManager()->FindModel(m_modelName);
 
-		if (m_model)
+		if (model)
 		{
 			m_modelReady = true;
 			std::ostringstream buf;
@@ -20,5 +31,15 @@ void Object::Draw(unsigned int s)
 	}
 
 	else
-		m_model->Draw(s);
+		model->Draw(s);
+}
+
+
+
+void Object::SetTransform(Vec3 p, Vec3 r, Vec3 s)
+{
+	transform.position = p;
+	transform.rotation = r;
+	transform.scale = s;
+	transform.UpdateMatrix();
 }

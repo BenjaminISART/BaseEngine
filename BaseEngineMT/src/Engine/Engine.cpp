@@ -63,7 +63,7 @@ namespace Core
 	{
 		// mainScene load
 		// --------------
-		m_renderer.m_scene.push_back(Core::SceneLoader::LoadScene("Data/Scenes/Scene1.xml"));
+		m_renderer.GetScenes()->push_back(Core::SceneLoader::LoadScene("Data/Scenes/Scene1.xml"));
 
 		Shader s("Resources/Shaders/object.vs", "Resources/Shaders/object.fs");
 		s.Use();

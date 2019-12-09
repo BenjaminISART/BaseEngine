@@ -28,6 +28,7 @@ namespace Core
 #pragma endregion
 
 #pragma region private methods
+		// Assimp Loading
 		void ProcessNode(aiNode* n, const aiScene* s);
 		Core::Mesh ProcessMesh(aiMesh* m, const aiScene* s);
 		std::vector<Texture> LoadMatTextures(aiMaterial* mat, aiTextureType type, const std::string& typeName);
@@ -45,65 +46,9 @@ namespace Core
 #pragma endregion
 
 #pragma region public methods
-		void BindMeshs()
-		{
-			for (auto& p : m_mesh)
-			{
-				// test if the mesh's buffers has been binded
-				if (!p.second)
-				{
-					p.second = true;
-					p.first.SetBuffers();
-				}
-			}
-		}
+		void BindMeshs();
 
-		void Draw(unsigned int s)
-		{
-			BindMeshs();
-
-			for (auto& mesh : m_mesh)
-			{
-				// bind appropriate textures
-				unsigned int diffuseNr = 1;
-				unsigned int specularNr = 1;
-				unsigned int normalNr = 1;
-				unsigned int heightNr = 1;
-
-				int i = 0;
-				
-				for (auto& texture : mesh.first.textures)
-				{
-					glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
-					// retrieve texture number (the N in diffuse_textureN)
-					std::string number;
-					std::string name = texture.type;
-					if (name == "texture_diffuse")
-						number = std::to_string(diffuseNr++);
-					else if (name == "texture_specular")
-						number = std::to_string(specularNr++); // transfer unsigned int to stream
-					else if (name == "texture_normal")
-						number = std::to_string(normalNr++); // transfer unsigned int to stream
-					else if (name == "texture_height")
-						number = std::to_string(heightNr++); // transfer unsigned int to stream
-
-															 // now set the sampler to the correct texture unit
-					glUniform1i(glGetUniformLocation(s, ("material." + name + number).c_str()), i);
-					// and finally bind the texture
-					texture.Use();
-					
-					i++;
-				}
-
-				// draw mesh
-				glBindVertexArray(mesh.first.VAO);
-				glDrawElements(GL_TRIANGLES, mesh.first.index.size(), GL_UNSIGNED_INT, nullptr);
-				glBindVertexArray(0);
-
-				// always good practice to set everything back to defaults once configured.
-				glActiveTexture(GL_TEXTURE0);
-			}
-		}
+		void Draw(unsigned int s);
 #pragma endregion
 	};
 }

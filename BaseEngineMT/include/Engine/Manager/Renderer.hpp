@@ -7,7 +7,7 @@
 
 class Renderer
 {
-public:
+private:
 
 #pragma region private attributes
 	std::vector<Scene> m_scene;
@@ -31,6 +31,7 @@ public:
 	void SetActualScene(int i) { m_actualScene = i; }
 
 	Scene* GetActualScene() { return &m_scene[m_actualScene]; }
+	std::vector<Scene>* GetScenes() { return &m_scene; }
 
 	void RendActualScene(unsigned int shaderid);
 #pragma endregion

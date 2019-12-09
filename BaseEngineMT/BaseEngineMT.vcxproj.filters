@@ -60,6 +60,15 @@
     <ClCompile Include="src\Engine\Property\Texture.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Object\Camera.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Property\Shader.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Property\Transform.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Engine\Engine.hpp">
@@ -137,6 +146,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
     <None Include="include\Engine\Maths\Vec3.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="include\Engine\Manager\RessourceManager.inl">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
   </ItemGroup>

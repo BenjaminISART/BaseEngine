@@ -19,10 +19,7 @@ private:
 
 public:
 
-	Transform() : position{Vec3::zero}, rotation{ Vec3::zero }, scale{ Vec3::zero }
-	{
-		UpdateMatrix();
-	} // CTOR
+	Transform(); // CTOR
 	// Transform(Transform const& c); // CPY CTOR
 	// Transform(Transform const && c); // MV CTOR
 	~Transform() = default; // DTOR
@@ -36,10 +33,9 @@ public:
 #pragma endregion
 
 #pragma region public methods
-	void UpdateMatrix()
-	{
-		transformMatrix = ptm::Mat4_utils::CreateTRS(position, rotation, scale);
-	}
+
+	void UpdateMatrix();
+
 #pragma endregion
 };
 

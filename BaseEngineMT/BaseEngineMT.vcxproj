@@ -140,9 +140,12 @@
     <ClCompile Include="src\Engine\Maths\Mat4.cpp" />
     <ClCompile Include="src\Engine\Maths\Mat4_utils.cpp" />
     <ClCompile Include="src\Engine\Maths\Vec3.cpp" />
+    <ClCompile Include="src\Engine\Object\Camera.cpp" />
     <ClCompile Include="src\Engine\Object\Object.cpp" />
     <ClCompile Include="src\Engine\Property\Model.cpp" />
+    <ClCompile Include="src\Engine\Property\Shader.cpp" />
     <ClCompile Include="src\Engine\Property\Texture.cpp" />
+    <ClCompile Include="src\Engine\Property\Transform.cpp" />
     <ClCompile Include="src\Engine\Tools\TaskSystem.cpp" />
     <ClCompile Include="src\Engine\Engine.cpp" />
     <ClCompile Include="src\Engine\Manager\SceneLoader.cpp" />
@@ -177,6 +180,7 @@
     <Xml Include="Data\Scenes\Scene1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="include\Engine\Manager\RessourceManager.inl" />
     <None Include="include\Engine\Maths\Mat4.inl" />
     <None Include="include\Engine\Maths\Vec3.inl" />
     <None Include="include\Engine\Tools\TaskSystem.inl" />
