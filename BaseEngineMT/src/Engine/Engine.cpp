@@ -29,11 +29,11 @@ namespace Core
 		}
 
 		glfwMakeContextCurrent(m_window);
-		//glfwSetFramebufferSizeCallback(m_window, FramebufferSizeCallback);
+		glfwSetFramebufferSizeCallback(m_window, FramebufferSizeCallback);
 		glfwSetCursorPosCallback(m_window, Managers::InputManager::MouseCallback);
-		glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		//glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		if (!gladLoadGLLoader(GLADloadproc(glfwGetProcAddress)))
+		if (!gladLoadGL())
 		{
 			std::cout << "Failed to initialize GLAD" << std::endl;
 			return;
@@ -61,6 +61,12 @@ namespace Core
 
 	void Engine::Run()
 	{
+		// TMP IN+MGUI IMPLEMENTATION
+
+		ImGui::CreateContext();
+		ImGui_ImplGlfw_InitForOpenGL(m_window, true);
+		ImGui::StyleColorsDark();
+		
 		// mainScene load
 		// --------------
 		m_renderer.GetScenes()->push_back(Core::SceneLoader::LoadScene("Data/Scenes/Scene1.xml"));
@@ -74,6 +80,12 @@ namespace Core
 		// -----------
 		while (!glfwWindowShouldClose(m_window))
 		{
+			glfwPollEvents();
+			
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();
+
 			// update
 			// ------
 			//Core::UpdateHandler::Instance()->UpdateAll();
@@ -85,20 +97,52 @@ namespace Core
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//Renderer::Render::Instance()->RendScene();
+			bool test;
+			ImVec4 test2;
+			{
+				static float f = 0.0f;
+				static int counter = 0;
+
+				
+				ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+				ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+				ImGui::Checkbox("Demo Window", &test);      // Edit bools storing our window open/close state
+				ImGui::Checkbox("Another Window", &test);
+
+				ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+				ImGui::ColorEdit3("clear color", (float*)&test2); // Edit 3 floats representing a color
+
+				if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+					counter++;
+				ImGui::SameLine();
+				ImGui::Text("counter = %d", counter);
+
+				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+				ImGui::End();
+			}
 
 			overviewCamera.Update();
 			m_renderer.RendActualScene(s.id);
 
+			ImGui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 			// -------------------------------------------------------------------------------
 			glfwSwapBuffers(m_window);
-			glfwPollEvents();
 
 			// input
 			// -----
 			if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 				glfwSetWindowShouldClose(m_window, true);
 		}
+
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
+
+		glfwDestroyWindow(m_window);
+		glfwTerminate();
 	}
 }

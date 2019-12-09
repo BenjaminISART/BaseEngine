@@ -1,6 +1,10 @@
 #ifndef __ENGINE__
 #define __ENGINE__
 
+#include "ExtraLibs/imgui/imgui.h"
+#include "ExtraLibs/imgui/imgui_impl_glfw.h"
+#include "ExtraLibs/imgui/imgui_impl_opengl3.h"
+
 #include <mutex>
 #include <memory>
 #include <glad/glad.h>
@@ -28,6 +32,14 @@ namespace Core
 #pragma region private methods
 		Engine(); // CTOR
 		friend std::unique_ptr<Engine> std::make_unique<Engine>();
+
+		static void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+		{
+			// make sure the viewport matches the new window dimensions; note that width and 
+			// height will be significantly larger than specified on retina displays.
+			glViewport(0, 0, width, height);
+		}
+		
 #pragma endregion
 
 	public:

@@ -1,4 +1,7 @@
 #include "Engine/Object/Camera.hpp"
+#include "Engine/Engine.hpp"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 using namespace ptm;
 
 
@@ -32,22 +35,25 @@ void Camera::Update()
 
 void Camera::ProcessMouseMovement(float x, float y)
 {
-	x *= 0.05f;
-	y *= 0.05f;
+	if (glfwGetMouseButton(Core::Engine::GetEngine()->GetWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		x *= 0.05f;
+		y *= 0.05f;
 
-	Yaw += x;
-	Pitch += y;
+		Yaw += x;
+		Pitch += y;
 
-	if (Pitch > 89.0f)
-		Pitch = 89.0f;
-	if (Pitch < -89.0f)
-		Pitch = -89.0f;
+		if (Pitch > 89.0f)
+			Pitch = 89.0f;
+		if (Pitch < -89.0f)
+			Pitch = -89.0f;
 
-	ptm::Vec3 front;
-	front.x = cos(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
-	front.y = sin(ptm::RAD(Pitch));
-	front.z = sin(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
-	target = front.Normal();
-	right = (Vec3::Cross(front, 1_Vec3y)).Normal();
-	up = (Vec3::Cross(right, front)).Normal();
+		ptm::Vec3 front;
+		front.x = cos(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
+		front.y = sin(ptm::RAD(Pitch));
+		front.z = sin(ptm::RAD(Yaw)) * cos(ptm::RAD(Pitch));
+		target = front.Normal();
+		right = (Vec3::Cross(front, 1_Vec3y)).Normal();
+		up = (Vec3::Cross(right, front)).Normal();
+	}
 }
