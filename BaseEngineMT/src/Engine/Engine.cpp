@@ -2,7 +2,6 @@
 #include "Engine/Tools/EngineStructure.hpp"
 #include "Engine/Manager/InputManager.hpp"
 
-
 // tmp
 #include "Engine/Property/Shader.hpp"
 
@@ -18,6 +17,7 @@ namespace Core
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		m_window = glfwCreateWindow(1000, 800, "EngineMT", nullptr, nullptr);
 
@@ -69,7 +69,6 @@ namespace Core
 
 		Shader s("Resources/Shaders/object.vs", "Resources/Shaders/object.fs");
 		s.Use();
-
 		overviewCamera.ProcessMouseMovement(0.0f, 0.0f);
 		
 		// render loop
@@ -92,6 +91,7 @@ namespace Core
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			overviewCamera.Update();
+
 			m_renderer.RendActualScene(s.id);
 			
 			m_guiManager.SetViewPort();

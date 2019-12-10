@@ -30,8 +30,11 @@ void Object::Draw(unsigned int s)
 		}
 	}
 
-	else
+	else if (model)
 		model->Draw(s);
+
+	if (!Core::Engine::GetEngine()->GetRessourceManager()->FindModel(m_modelName))
+		m_modelReady = false;
 }
 
 

@@ -10,6 +10,7 @@ void GuiManager::Init(GLFWwindow* w)
 	m_window = w;
 	
 	ImGui::CreateContext();
+	ImGui_ImplOpenGL3_Init("#version 130");
 	ImGui_ImplGlfw_InitForOpenGL(m_window, true);
 	ImGui::StyleColorsDark();
 }
@@ -27,117 +28,191 @@ void GuiManager::NewFrame() const
 
 void GuiManager::SetViewPort()
 {
+	//************************************* Scene's Objects
+
 	ImGui::Begin("Scene");
 
 	ImGui::SetWindowPos({ 0,0 });
-	ImGui::SetWindowSize({ 200, 200 });
+	ImGui::SetWindowSize({ 400, 200 });
 
 	Core::Engine* eng = Core::Engine::GetEngine();
+	auto sg = eng->GetRenderer()->GetActualScene()->GetSGraph().GetObjects();
+
+	std::vector<std::string> toDelete;
 
 	ImGui::Separator();
-	for (auto& object : *eng->GetRenderer()->GetActualScene()->GetSGraph().GetObjects())
-	{
 
-		if (ImGui::BeginMenu(std::string(object.first + " :").c_str()))
+	/* Objects */
+	{
+		for (auto it = sg->begin(); it != sg->end(); it++)
 		{
-			ImGui::InputFloat(std::string(object.first + " pos x").c_str(), &object.second.transform.position.x); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " pos y").c_str(), &object.second.transform.position.y); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " pos z").c_str(), &object.second.transform.position.z);
-			ImGui::SliderFloat(std::string(object.first + "  pos x").c_str(), &object.second.transform.position.x, -100.0f, 100.0f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  pos y").c_str(), &object.second.transform.position.y, -100.0f, 100.0f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  pos z").c_str(), &object.second.transform.position.z, -100.0f, 100.0f);
-			ImGui::InputFloat(std::string(object.first + " rot x").c_str(), &object.second.transform.rotation.x); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " rot y").c_str(), &object.second.transform.rotation.y); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " rot z").c_str(), &object.second.transform.rotation.z);
-			ImGui::SliderFloat(std::string(object.first + "  rot x").c_str(), &object.second.transform.rotation.x, -3.14f, 3.14f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  rot y").c_str(), &object.second.transform.rotation.y, -3.14f, 3.14f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  rot z").c_str(), &object.second.transform.rotation.z, -3.14f, 3.14f);
-			ImGui::InputFloat(std::string(object.first + " scl x").c_str(), &object.second.transform.scale.x); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " scl y").c_str(), &object.second.transform.scale.y); ImGui::SameLine();
-			ImGui::InputFloat(std::string(object.first + " scl z").c_str(), &object.second.transform.scale.z);
-			ImGui::SliderFloat(std::string(object.first + "  scl x").c_str(), &object.second.transform.scale.x, 0.0f, 10.0f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  scl y").c_str(), &object.second.transform.scale.y, 0.0f, 10.0f); ImGui::SameLine();
-			ImGui::SliderFloat(std::string(object.first + "  scl z").c_str(), &object.second.transform.scale.z, 0.0f, 10.0f);
+			if (ImGui::BeginMenu(std::string(it->first + " :").c_str()))
+			{
+				ImGui::Text("Position");
+				ImGui::InputFloat(std::string("x##" + it->first + "pos").c_str(), &it->second.transform.position.x); ImGui::SameLine();
+				ImGui::InputFloat(std::string("y##" + it->first + "pos").c_str(), &it->second.transform.position.y); ImGui::SameLine();
+				ImGui::InputFloat(std::string("z##" + it->first + "pos").c_str(), &it->second.transform.position.z);
+				ImGui::SliderFloat(std::string("x##" + it->first + "poss").c_str(), &it->second.transform.position.x, -100.0f, 100.0f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("y##" + it->first + "poss").c_str(), &it->second.transform.position.y, -100.0f, 100.0f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("z##" + it->first + "poss").c_str(), &it->second.transform.position.z, -100.0f, 100.0f);
+				ImGui::Text("Rotation");
+				ImGui::InputFloat(std::string("x##" + it->first + "rot").c_str(), &it->second.transform.rotation.x); ImGui::SameLine();
+				ImGui::InputFloat(std::string("y##" + it->first + "rot").c_str(), &it->second.transform.rotation.y); ImGui::SameLine();
+				ImGui::InputFloat(std::string("z##" + it->first + "rot").c_str(), &it->second.transform.rotation.z);
+				ImGui::SliderFloat(std::string("x##" + it->first + "rott").c_str(), &it->second.transform.rotation.x, -3.14f, 3.14f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("y##" + it->first + "rott").c_str(), &it->second.transform.rotation.y, -3.14f, 3.14f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("z##" + it->first + "rott").c_str(), &it->second.transform.rotation.z, -3.14f, 3.14f);
+				ImGui::Text("Scale");
+				ImGui::InputFloat(std::string("x##" + it->first + "scl").c_str(), &it->second.transform.scale.x); ImGui::SameLine();
+				ImGui::InputFloat(std::string("y##" + it->first + "scl").c_str(), &it->second.transform.scale.y); ImGui::SameLine();
+				ImGui::InputFloat(std::string("z##" + it->first + "scl").c_str(), &it->second.transform.scale.z);
+				ImGui::SliderFloat(std::string("x##" + it->first + "scll").c_str(), &it->second.transform.scale.x, 0.0f, 10.0f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("y##" + it->first + "scll").c_str(), &it->second.transform.scale.y, 0.0f, 10.0f); ImGui::SameLine();
+				ImGui::SliderFloat(std::string("z##" + it->first + "scll").c_str(), &it->second.transform.scale.z, 0.0f, 10.0f);
+
+				ImGui::Separator();
+
+				static char name[80] = {};
+				ImGui::InputText("name", name, 80);
+				if (ImGui::Button("Set model"))
+					it->second.SetNewModel(name);
+
+				ImGui::Separator();
+
+				if (ImGui::Button("Remove"))
+					toDelete.push_back(it->first);
+				else
+					it->second.transform.UpdateMatrix();
+				ImGui::EndMenu();
+			}
+
+		}
+	}
+
+	for (auto td : toDelete)
+		eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(td);
+	toDelete.empty();
+
+	ImGui::Separator();
+
+	/* Add Object */
+	{
+		if (ImGui::BeginMenu("Add Object"))
+		{
+			static char nam[80] = {};
+			static char mod[80] = {};
+
+			ImGui::InputText("name", nam, 80);
+			ImGui::InputText("model", mod, 80);
+
+			if (ImGui::Button("Confirm", { 100, 20 }))
+			{
+				std::cout << "new Object : " << nam << std::endl;
+				Object toAdd;
+				toAdd.SetModelName(std::string(mod));
+				eng->GetRenderer()->GetActualScene()->GetSGraph().AddObject(std::string(nam), toAdd);
+			}
+
 			ImGui::EndMenu();
 		}
-
-		object.second.transform.UpdateMatrix();
 	}
 
-	ImGui::Separator();
-
-	if (ImGui::BeginMenu("Add Object"))
+	/* Remove Object with name */
 	{
-		static char nam[80] = {};
-		static char mod[80] = {};
-
-		ImGui::InputText("name", nam, 80);
-		ImGui::InputText("model", mod, 80);
-
-		if (ImGui::Button("Confirm", { 100, 20 }))
+		if (ImGui::BeginMenu("Remove Object"))
 		{
-			std::cout << "new Object : " << nam << std::endl;
-			Object toAdd;
-			toAdd.SetModelName(std::string(mod));
-			eng->GetRenderer()->GetActualScene()->GetSGraph().AddObject(std::string(nam), toAdd);
+			static char nameToDelete[80] = {};
+
+			ImGui::InputText("name", nameToDelete, 80);
+
+			if (ImGui::Button("Confirm", { 100, 20 }))
+			{
+				std::cout << "Delete Object : " << nameToDelete << std::endl;
+				eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(std::string(nameToDelete));
+			}
+
+			ImGui::EndMenu();
 		}
-
-		ImGui::EndMenu();
-	}
-
-	ImGui::Separator();
-
-	if (ImGui::BeginMenu("Remove Object"))
-	{
-		static char nameToDelete[80] = {};
-
-		ImGui::InputText("name", nameToDelete, 80);
-
-		if (ImGui::Button("Confirm", { 100, 20 }))
-		{
-			std::cout << "Delete Object : " << nameToDelete << std::endl;
-			eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(std::string(nameToDelete));
-		}
-
-		ImGui::EndMenu();
 	}
 
 	ImVec2 size = ImGui::GetWindowSize();
 
+	ImGui::Separator();
+	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
 	ImGui::End();
+
+	//************************************ Ressource Manager gui
 
 	ImGui::Begin("Ressource Manager");
 
 	ImGui::SetWindowPos({ size.x,0 });
 	ImGui::SetWindowSize({ 200, 200 });
 
-	for (auto& model : *eng->GetRessourceManager()->GetLoadedsModel())
+	/* Models */
 	{
-		if (ImGui::BeginMenu(std::string(model.first + " :").c_str()))
+		for (auto& model : *eng->GetRessourceManager()->GetLoadedsModel())
 		{
-			ImGui::Text("path : "); ImGui::SameLine();
-			ImGui::Text(model.second.GetPath());
-			ImGui::EndMenu();
+			if (ImGui::BeginMenu(std::string(model.first + " :").c_str()))
+			{
+				ImGui::Text("path : "); ImGui::SameLine();
+				ImGui::Text(model.second.GetPath());
+				ImGui::Text("NumVertex : "); ImGui::SameLine();
+				ImGui::Text(std::to_string(model.second.numVertex).c_str());
+				ImGui::Text("NumFaces : "); ImGui::SameLine();
+				ImGui::Text(std::to_string(model.second.numFace).c_str());
+				ImGui::Spacing();
+				if (ImGui::Button("Remove"))
+					toDelete.push_back(model.first);
+				ImGui::EndMenu();
+			}
 		}
 	}
 
+	for (auto td : toDelete)
+		eng->GetRessourceManager()->GetLoadedsModel()->erase(td);
+	toDelete.empty();
+	
 	ImGui::Separator();
 
-	if (ImGui::BeginMenu("Load Model"))
+	/* Add / Remove model */
 	{
-		static char path[80] = {};
-		static char name[80] = {};
-
-		ImGui::InputText("name", name, 80);
-		ImGui::InputText("path", path, 80);
-
-		if (ImGui::Button("Confirm", { 100, 20 }))
+		if (ImGui::BeginMenu("Load Model"))
 		{
-			std::cout << "run time load : " << path << std::endl;
-			eng->GetRessourceManager()->RequestLoad(std::string(path), std::string(name));
+			static char path[80] = {};
+			static char name[80] = {};
+
+			ImGui::InputText("name", name, 80);
+			ImGui::InputText("path", path, 80);
+
+			if (ImGui::Button("Confirm", { 100, 20 }))
+			{
+				std::cout << "run time load : " << path << std::endl;
+				eng->GetRessourceManager()->RequestLoad(std::string(path), std::string(name));
+			}
+
+			ImGui::EndMenu();
 		}
 
-		ImGui::EndMenu();
+		if (ImGui::BeginMenu("Remove Model"))
+		{
+			static char nameToDelete[80] = {};
+
+			ImGui::InputText("name", nameToDelete, 80);
+
+			if (ImGui::Button("Confirm", { 100, 20 }))
+			{
+				std::cout << "Delete Object : " << nameToDelete << std::endl;
+				eng->GetRessourceManager()->GetLoadedsModel()->erase(nameToDelete);
+			}
+
+			ImGui::EndMenu();
+		}
+
+		ImGui::Separator();
+
+		if (ImGui::Button("Exemple Load"))
+			eng->GetRessourceManager()->RequestLoad("Resources/Model/Skull/Gufram_Jolly_Roger_mat(1).obj", "test");
 	}
 
 	ImGui::End();

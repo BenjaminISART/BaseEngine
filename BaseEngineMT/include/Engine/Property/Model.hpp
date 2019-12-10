@@ -47,6 +47,8 @@ namespace Core
 		Model& operator=(Model&& t) = default;
 
 #pragma region public attributes
+		unsigned int numVertex = 0;
+		unsigned int numFace = 0;
 #pragma endregion
 
 #pragma region public methods

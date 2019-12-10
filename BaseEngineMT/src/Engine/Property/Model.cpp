@@ -81,6 +81,7 @@ Core::Mesh Core::Model::ProcessMesh(aiMesh* m, const aiScene* s)
 		//vector.z = m->mBitangents[i].z;
 		//vertex.Bitangent = vector;
 		//vertices.push_back(vertex);
+
 	}
 	// now wak through each of the m's faces (a face is a m its triangle) and retrieve the corresponding vertex indices.
 	for (unsigned int i = 0; i < m->mNumFaces; i++)
@@ -89,7 +90,10 @@ Core::Mesh Core::Model::ProcessMesh(aiMesh* m, const aiScene* s)
 		// retrieve all indices of the face and store them in the indices vector
 		for (unsigned int j = 0; j < face.mNumIndices; j++)
 			ret.index.push_back(face.mIndices[j]);
+
 	}
+	numVertex = m->mNumVertices;
+	numFace = m->mNumFaces;
 
 	aiMaterial* material = s->mMaterials[m->mMaterialIndex];
 
