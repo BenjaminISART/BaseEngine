@@ -24,8 +24,8 @@ private:
 
 public:
 
-	Object() = default; // CTOR
-	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = 1_Vec3);
+	Object() { transform.scale = Vec3(0.1f, 0.1f, 0.1f); } // CTOR
+	Object(Vec3 p, Vec3 r = Vec3::zero, Vec3 s = Vec3(1,1,1));
 	Object(Object const& c) = default; // CPY CTOR
 	Object(Object&& c) = default; // MV CTOR
 	~Object() = default; // DTOR
