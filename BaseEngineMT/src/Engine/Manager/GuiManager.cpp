@@ -191,6 +191,8 @@ void GuiManager::SetViewPort()
 				}
 			}
 
+			ImGui::Separator();
+
 			/* Add / Remove model */
 			{
 				if (ImGui::BeginMenu("Load Model"))
@@ -236,6 +238,24 @@ void GuiManager::SetViewPort()
 		ImGui::EndMainMenuBar();
 	}
 
+	static bool showPerf;
+	static bool posReset;
+	ImVec2 reset(10, 10);
+
+	/* Window */
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("Window"))
+		{
+			if (ImGui::Checkbox("Show Perf Window", &showPerf))
+				posReset = true;
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+	}
+
+	/* Perf */
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("Perf"))
@@ -247,10 +267,20 @@ void GuiManager::SetViewPort()
 		ImGui::EndMainMenuBar();
 	}
 
+	static float newSpeed = 1.0f;
+	static float newSensi = 1.0f;
+
+	/* Option */
 	if (ImGui::BeginMainMenuBar())
 	{
-		if (ImGui::BeginMenu("Option"))
+		if (ImGui::BeginMenu("Options"))
 		{
+
+			ImGui::SliderFloat("Camera Speed : ", &newSpeed, 0.0f, 10.0f, "%.1f");
+			eng->SetOverviewCameraSpeed(newSpeed);
+			ImGui::SliderFloat("Camera Sensi : ", &newSensi, 0.0f, 10.0f, "%.1f");
+			eng->SetOverviewCameraSensibility(newSensi);
+
 			if (ImGui::Button("Exit"))
 			{
 				glfwSetWindowShouldClose(m_window, true);
@@ -259,6 +289,22 @@ void GuiManager::SetViewPort()
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
+	}
+
+	/* Perf Window */
+	if (showPerf)
+	{
+		ImGui::Begin("Perf");
+
+		if (posReset)
+		{
+			posReset = false;
+			ImGui::SetWindowPos(reset);
+		}
+
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+		ImGui::End();
 	}
 
 	for (auto td : toDelete)

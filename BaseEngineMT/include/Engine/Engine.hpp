@@ -63,6 +63,9 @@ namespace Core
 		GLFWwindow* GetWindow() { return m_window; }
 		Renderer* GetRenderer() { return &m_renderer; }
 		RessourceManager* GetRessourceManager() { return &m_rm; }
+
+		void SetOverviewCameraSpeed(float _speed) { overviewCamera.speed = _speed; }
+		void SetOverviewCameraSensibility(float _sensi) { overviewCamera.sensibility = _sensi; }
 #pragma endregion
 
 	};

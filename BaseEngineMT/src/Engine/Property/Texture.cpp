@@ -7,6 +7,15 @@
 #include <sys/stat.h>
 
 
+Texture::Texture(const std::string& _path) : m_data{ nullptr }, m_binded{ false }, id{ 0 }
+{
+	path = _path;
+
+	stbi_set_flip_vertically_on_load(true);
+	m_data = stbi_load(path.c_str(), &m_width, &m_height, &m_nrChannels, 0);
+}
+
+
 
 void Texture::Bind()
 {
@@ -48,14 +57,4 @@ void Texture::Use()
 void Texture::FreeImage()
 {
 	stbi_image_free(m_data);
-}
-
-
-
-Texture::Texture(const std::string& _path): m_data{nullptr}, m_binded{false}, id{0}
-{
-	path = _path;
-	
-	stbi_set_flip_vertically_on_load(true);
-	m_data = stbi_load(path.c_str(), &m_width, &m_height, &m_nrChannels, 0);
 }

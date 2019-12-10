@@ -20,13 +20,17 @@ Camera::Camera(ptm::Vec3 _position, ptm::Vec3 _target, ptm::Vec3 _up) :
 void Camera::Update()
 {
 	if (Input->IsPressingKey(GLFW_KEY_W))
-		m_position += m_target * 0.05f;
+		m_position += m_target * 0.05f * speed;
 	if (Input->IsPressingKey(GLFW_KEY_S))
-		m_position -= m_target * 0.05f;
+		m_position -= m_target * 0.05f * speed;
 	if (Input->IsPressingKey(GLFW_KEY_D))
-		m_position += m_right * 0.05f;
+		m_position += m_right * 0.05f * speed;
 	if (Input->IsPressingKey(GLFW_KEY_A))
-		m_position += -m_right * 0.05f;
+		m_position += -m_right * 0.05f * speed;
+	if (Input->IsPressingKey(GLFW_KEY_LEFT_SHIFT))
+		m_position += m_up * 0.05f * speed;
+	if (Input->IsPressingKey(GLFW_KEY_LEFT_CONTROL))
+		m_position += m_up * -0.05f * speed;
 
 	cameraMatrix = Mat4_utils::LookAt(m_position, m_position + m_target, m_up);
 }
@@ -37,8 +41,8 @@ void Camera::ProcessMouseMovement(float x, float y)
 {
 	if (glfwGetMouseButton(Core::Engine::GetEngine()->GetWindow(), GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS || m_firstProcess)
 	{
-		x *= 0.05f;
-		y *= 0.05f;
+		x *= 0.05f * sensibility;
+		y *= 0.05f * sensibility;
 
 		m_Yaw += x;
 		m_Pitch += y;

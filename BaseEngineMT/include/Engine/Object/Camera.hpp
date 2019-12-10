@@ -40,6 +40,9 @@ public:
 #pragma region public attributes
 	ptm::Mat4 cameraMatrix;
 	ptm::Mat4 projectionMatrix;
+
+	float speed = 1.0f;
+	float sensibility = 1.0f;
 #pragma endregion
 
 #pragma region public methods
