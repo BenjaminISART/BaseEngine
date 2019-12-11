@@ -57,6 +57,8 @@ namespace Core
 		void Draw(unsigned int s);
 
 		const char* GetPath() const { return m_fullpath.c_str(); }
+
+		void SetTextureDiffuse(const std::string& name);
 #pragma endregion
 	};
 }

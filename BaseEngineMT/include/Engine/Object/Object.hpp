@@ -50,6 +50,10 @@ public:
 		m_modelReady = false;
 		model = nullptr;
 	}
+	void SetModelTexture(const std::string& newName)
+	{
+		model->SetTextureDiffuse(newName);
+	}
 
 #pragma endregion
 };

@@ -97,6 +97,13 @@ void GuiManager::SetViewPort()
 
 					ImGui::Separator();
 
+					static char namet[80] = {};
+					ImGui::InputText("namet", namet, 80);
+					if (ImGui::Button("Set texture"))
+						it->second.SetModelTexture(namet);
+
+					ImGui::Separator();
+
 					if (ImGui::Button("Remove"))
 						toDelete.push_back(it->first);
 					else
@@ -155,7 +162,7 @@ void GuiManager::SetViewPort()
 
 	for (auto td : toDelete)
 		eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(td);
-	toDelete.empty();
+	toDelete.clear();
 
 	//ImGui::Separator();
 
@@ -193,6 +200,24 @@ void GuiManager::SetViewPort()
 
 			ImGui::Separator();
 
+			/* Texture */
+			{
+				for (auto& texture : *eng->GetRessourceManager()->GetLoadedsTexture())
+				{
+					if (ImGui::BeginMenu(std::string(texture.first + " :").c_str()))
+					{
+						ImGui::Text("path : "); ImGui::SameLine();
+						ImGui::Text(texture.second.path.c_str());
+						ImGui::Spacing();
+						/*if (ImGui::Button("Remove"))
+							toDelete.push_back(model.first);*/
+						ImGui::EndMenu();
+					}
+				}
+			}
+
+			ImGui::Separator();
+
 			/* Add / Remove model */
 			{
 				if (ImGui::BeginMenu("Load Model"))
@@ -206,7 +231,7 @@ void GuiManager::SetViewPort()
 					if (ImGui::Button("Confirm", { 100, 20 }))
 					{
 						std::cout << "run time load : " << path << std::endl;
-						eng->GetRessourceManager()->RequestLoad(std::string(path), std::string(name));
+						eng->GetRessourceManager()->RequestModelLoad(std::string(path), std::string(name));
 					}
 
 					ImGui::EndMenu();
@@ -230,7 +255,7 @@ void GuiManager::SetViewPort()
 				ImGui::Separator();
 
 				if (ImGui::Button("Exemple Load"))
-					eng->GetRessourceManager()->RequestLoad("Resources/Model/Skull/Gufram_Jolly_Roger_mat(1).obj", "test");
+					eng->GetRessourceManager()->RequestModelLoad("Resources/Model/Skull/Gufram_Jolly_Roger_mat(1).obj", "test");
 			}
 
 			ImGui::EndMenu();
@@ -309,7 +334,7 @@ void GuiManager::SetViewPort()
 
 	for (auto td : toDelete)
 		eng->GetRessourceManager()->GetLoadedsModel()->erase(td);
-	toDelete.empty();
+	toDelete.clear();
 }
 
 

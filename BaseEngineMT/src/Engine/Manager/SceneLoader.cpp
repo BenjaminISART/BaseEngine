@@ -49,8 +49,12 @@ namespace Core
 		for (xml_node<>* resource = gO->first_node(); resource; resource = resource->next_sibling())  
 		{
 			if (strcmp(resource->name(), "Model") == 0)
-				Core::Engine::GetEngine()->GetRessourceManager()->RequestLoad(resource->value(), 
+				Core::Engine::GetEngine()->GetRessourceManager()->RequestModelLoad(resource->value(), 
 																			  resource->first_attribute("name")->value());
+
+			if (strcmp(resource->name(), "Texture") == 0)
+				Core::Engine::GetEngine()->GetRessourceManager()->RequestTextureLoad(resource->value(),
+					resource->first_attribute("name")->value());
 		}
 	}
 

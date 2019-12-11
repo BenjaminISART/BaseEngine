@@ -13,10 +13,10 @@ class Texture
 private:
 
 #pragma region private attributes
-	unsigned char* m_data;
+	unsigned char* m_data = nullptr;
 	int m_width{0}, m_height{0}, m_nrChannels{0};
 
-	bool m_binded;
+	bool m_binded = false;
 #pragma endregion
 
 #pragma region private methods
@@ -37,9 +37,9 @@ public:
 	Texture& operator=(Texture&& t) = default;
 
 #pragma region public attributes
-	GLuint id;
-	std::string type;
-	std::string path;
+	GLuint id = 0;
+	std::string type = "texture_diffuse";
+	std::string path = "";
 #pragma endregion
 
 #pragma region public methods

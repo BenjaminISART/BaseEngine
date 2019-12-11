@@ -20,7 +20,7 @@
     <Model name="skull4">Resources/Model/Skull/Gufram_Jolly_Roger_mat(4).obj</Model>
     <!--<Model name="city">Resources/Model/city.obj</Model>-->
 
-    <Texture name="white">Resources/Textures/white.jpg</Texture>
+    <Texture name="undefined">Resources/Textures/undefined.png</Texture>
   </Resource>
 
   <GameObject name="benji">

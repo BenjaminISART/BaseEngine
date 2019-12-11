@@ -1,4 +1,5 @@
 #include "Engine/Property/Model.hpp"
+#include "Engine/Engine.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -215,4 +216,27 @@ void Core::Model::Draw(unsigned int s)
 		// always good practice to set everything back to defaults once configured.
 		glActiveTexture(GL_TEXTURE0);
 	}
+}
+
+
+
+void Core::Model::SetTextureDiffuse(const std::string& name)
+{
+	Core::Engine* eng = Core::Engine::GetEngine();
+
+	if (eng->GetRessourceManager()->FindTexture(name))
+	{
+		std::cout << eng->GetRessourceManager()->FindTexture(name)->type << std::endl;
+		if (eng->GetRessourceManager()->FindTexture(name)->type == "texture_diffuse")
+		{
+			for (auto& mesh : m_mesh)
+			{
+				mesh.first.textures.clear();
+				mesh.first.textures.push_back(*eng->GetRessourceManager()->FindTexture(name));
+			}
+		}
+	}
+
+	else
+		std::cout << "pas trouve : " << name << std::endl;
 }
