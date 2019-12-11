@@ -13,7 +13,7 @@ namespace Core
 	class SceneLoader
 	{
 	private:
-		static void SetGameObject(Scene* s, xml_node<>*, const std::string& parentName = "noparent");
+		static void CreateObject(Scene* s, xml_node<>*, const std::string& parentName = "noparent");
 		static void LoadResources(Scene* s, xml_node<>*);
 		static void LoadGameObjects(Scene* s, xml_node<>*);
 

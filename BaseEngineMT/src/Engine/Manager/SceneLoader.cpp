@@ -3,6 +3,7 @@
 #include "Engine/Property/Model.hpp"
 #include "Engine/Engine.hpp"
 #include "Engine/Maths/Vec3.hpp"
+#include "Engine/Manager/LogManager.hpp"
 #include <vector>
 #include <sstream>
 #include <fstream>
@@ -33,17 +34,21 @@ namespace Core
 		return ret;
 	}
 
+
+
 	void SceneLoader::LoadGameObjects(Scene* s, xml_node<>* root_node)
 	{
+		// Create all the objects of the xml scene file
 		for (xml_node<>* gO = root_node->first_node("GameObject"); gO; gO = gO->next_sibling())
-		{
 			if (strcmp(gO->name(), "GameObject") == 0)
-				SetGameObject(s, gO);
-		}
+				CreateObject(s, gO);
 	}
+
+
 
 	void SceneLoader::LoadResources(Scene* s, xml_node<>* root_node)
 	{
+		// Create all the ressources of the xml scene file
 		xml_node<>* gO = root_node->first_node("Resource");
 
 		for (xml_node<>* resource = gO->first_node(); resource; resource = resource->next_sibling())  
@@ -58,19 +63,21 @@ namespace Core
 		}
 	}
 
-	void SceneLoader::SetGameObject(Scene* s, xml_node<>* gO, const std::string& parentName)
+
+
+	void SceneLoader::CreateObject(Scene* s, xml_node<>* gO, const std::string& parentName)
 	{
 		Object toAdd;
 
-		std::cout << "new game objet : " << gO->first_attribute("name")->value() << std::endl;
+		EngineLog("New game objet : " + std::string(gO->first_attribute("name")->value()));
 
 		for (xml_node<>* script = gO->first_node(); script; script = script->next_sibling())
 		{
+			// Set Default choosed model
 			if (strcmp(std::string(script->name()).c_str(), "Model") == 0)
-			{
 				toAdd.SetModelName(script->value());
-			}
 
+			// Get Transform parameters
 			if (strcmp(script->name(), "Transform") == 0)
 			{
 				ptm::Vec3 t, r, s;

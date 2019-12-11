@@ -60,9 +60,10 @@ namespace Core
 #pragma region public methods 
 		void Run();
 
-		GLFWwindow* GetWindow() { return m_window; }
-		Renderer* GetRenderer() { return &m_renderer; }
-		RessourceManager* GetRessourceManager() { return &m_rm; }
+		GLFWwindow*			GetWindow() { return m_window; }
+		Renderer*			GetRenderer() { return &m_renderer; }
+		RessourceManager*	GetRessourceManager() { return &m_rm; }
+		GuiManager*			GetGuiManager() { return &m_guiManager; }
 
 		void SetOverviewCameraSpeed(float _speed) { overviewCamera.speed = _speed; }
 		void SetOverviewCameraSensibility(float _sensi) { overviewCamera.sensibility = _sensi; }

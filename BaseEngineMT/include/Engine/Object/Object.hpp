@@ -44,12 +44,7 @@ public:
 	void Draw(unsigned int s);
 
 	void SetModelName(const std::string& newName) { m_modelName = newName; }
-	void SetNewModel(const std::string& newName)
-	{
-		SetModelName(newName);
-		m_modelReady = false;
-		model = nullptr;
-	}
+	void SetNewModel(const std::string& newName);
 	void SetModelTexture(const std::string& newName)
 	{
 		model->SetTextureDiffuse(newName);

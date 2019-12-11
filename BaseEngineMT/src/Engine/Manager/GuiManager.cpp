@@ -1,6 +1,8 @@
 #include "Engine/Manager/GuiManager.hpp"
 #include "Engine/Engine.hpp"
 
+#include "Engine/Manager/LogManager.hpp"
+
 #include "ExtraLibs/imgui/imgui.h"
 #include "ExtraLibs/imgui/imgui_impl_glfw.h"
 #include "ExtraLibs/imgui/imgui_impl_opengl3.h"
@@ -28,6 +30,8 @@ void GuiManager::NewFrame() const
 
 void GuiManager::SetViewPort()
 {
+	lw.Draw("Log");
+
 	//************************************* Scene's Objects
 
 	//ImGui::Begin("Scene");
@@ -90,6 +94,7 @@ void GuiManager::SetViewPort()
 
 					ImGui::Separator();
 
+					// set new model
 					static char name[80] = {};
 					ImGui::InputText("name", name, 80);
 					if (ImGui::Button("Set model"))
@@ -97,15 +102,19 @@ void GuiManager::SetViewPort()
 
 					ImGui::Separator();
 
+					// Set new texture
 					static char namet[80] = {};
-					ImGui::InputText("namet", namet, 80);
+					ImGui::InputText("name##t", namet, 80);
 					if (ImGui::Button("Set texture"))
 						it->second.SetModelTexture(namet);
 
 					ImGui::Separator();
 
 					if (ImGui::Button("Remove"))
+					{
 						toDelete.push_back(it->first);
+						EngineLog("Object " + it->first + " removed");
+					}
 					else
 						it->second.transform.UpdateMatrix();
 
@@ -127,7 +136,7 @@ void GuiManager::SetViewPort()
 
 					if (ImGui::Button("Confirm", { 100, 20 }))
 					{
-						std::cout << "new Object : " << nam << std::endl;
+						EngineLog("new Object : " + std::string(nam));
 						Object toAdd;
 						toAdd.SetModelName(std::string(mod));
 						eng->GetRenderer()->GetActualScene()->GetSGraph().AddObject(std::string(nam), toAdd);
@@ -147,7 +156,7 @@ void GuiManager::SetViewPort()
 
 					if (ImGui::Button("Confirm", { 100, 20 }))
 					{
-						std::cout << "Delete Object : " << nameToDelete << std::endl;
+						EngineLog("Deleted Object : " + std::string(nameToDelete));
 						eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(std::string(nameToDelete));
 					}
 
@@ -161,7 +170,9 @@ void GuiManager::SetViewPort()
 	}
 
 	for (auto td : toDelete)
+	{
 		eng->GetRenderer()->GetActualScene()->GetSGraph().RemoveObject(td);
+	}
 	toDelete.clear();
 
 	//ImGui::Separator();
@@ -193,9 +204,20 @@ void GuiManager::SetViewPort()
 						ImGui::Spacing();
 						if (ImGui::Button("Remove"))
 							toDelete.push_back(model.first);
+
 						ImGui::EndMenu();
 					}
 				}
+
+				for (auto td : toDelete)
+				{
+					if (eng->GetRessourceManager()->FindModel(td))
+					{
+						EngineLog("Model " + td + " removed");
+						eng->GetRessourceManager()->GetLoadedsModel()->erase(td);
+					}
+				}
+				toDelete.clear();
 			}
 
 			ImGui::Separator();
@@ -209,11 +231,22 @@ void GuiManager::SetViewPort()
 						ImGui::Text("path : "); ImGui::SameLine();
 						ImGui::Text(texture.second.path.c_str());
 						ImGui::Spacing();
-						/*if (ImGui::Button("Remove"))
-							toDelete.push_back(model.first);*/
+						if (ImGui::Button("Remove"))
+							toDelete.push_back(texture.first);
+
 						ImGui::EndMenu();
 					}
 				}
+
+				for (auto td : toDelete)
+				{
+					if (eng->GetRessourceManager()->FindTexture(td))
+					{
+						EngineLog("Texture " + td + " removed");
+						eng->GetRessourceManager()->GetLoadedsTexture()->erase(td);
+					}
+				}
+				toDelete.clear();
 			}
 
 			ImGui::Separator();
@@ -230,7 +263,7 @@ void GuiManager::SetViewPort()
 
 					if (ImGui::Button("Confirm", { 100, 20 }))
 					{
-						std::cout << "run time load : " << path << std::endl;
+						EngineLog("Loading " + std::string(path));
 						eng->GetRessourceManager()->RequestModelLoad(std::string(path), std::string(name));
 					}
 
@@ -245,8 +278,11 @@ void GuiManager::SetViewPort()
 
 					if (ImGui::Button("Confirm", { 100, 20 }))
 					{
-						std::cout << "Delete Object : " << nameToDelete << std::endl;
-						eng->GetRessourceManager()->GetLoadedsModel()->erase(nameToDelete);
+						if (eng->GetRessourceManager()->FindModel(nameToDelete))
+						{
+							EngineLog(std::string(nameToDelete) + " deleted");
+							eng->GetRessourceManager()->GetLoadedsModel()->erase(nameToDelete);
+						}
 					}
 
 					ImGui::EndMenu();
@@ -275,6 +311,9 @@ void GuiManager::SetViewPort()
 			if (ImGui::Checkbox("Show Perf Window", &showPerf))
 				posReset = true;
 
+			if (ImGui::Checkbox("Show Log Window", &lw.draw))
+				lw.reseted = false;
+
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -294,6 +333,7 @@ void GuiManager::SetViewPort()
 
 	static float newSpeed = 1.0f;
 	static float newSensi = 1.0f;
+	static bool	 tLoad = true;
 
 	/* Option */
 	if (ImGui::BeginMainMenuBar())
@@ -305,6 +345,11 @@ void GuiManager::SetViewPort()
 			eng->SetOverviewCameraSpeed(newSpeed);
 			ImGui::SliderFloat("Camera Sensi : ", &newSensi, 0.0f, 10.0f, "%.1f");
 			eng->SetOverviewCameraSensibility(newSensi);
+
+			if (ImGui::Checkbox("Threaded Ressource Load", &tLoad))
+			{
+				eng->GetRessourceManager()->threadedLoad.store(tLoad);
+			}
 
 			if (ImGui::Button("Exit"))
 			{
@@ -332,9 +377,7 @@ void GuiManager::SetViewPort()
 		ImGui::End();
 	}
 
-	for (auto td : toDelete)
-		eng->GetRessourceManager()->GetLoadedsModel()->erase(td);
-	toDelete.clear();
+	
 }
 
 

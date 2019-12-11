@@ -3,6 +3,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "ExtraLibs/stb_image/stb_image.h"
 
+#include "Engine/Manager/LogManager.hpp"
+
 #include <sstream>
 #include <sys/stat.h>
 
@@ -36,7 +38,7 @@ void Texture::Bind()
 #endif
 	}
 	else
-		std::cout << "Failed to load texture " << path << std::endl;
+		EngineLog("Failed to load texture " + path);
 
 	FreeImage();
 	m_binded = true;

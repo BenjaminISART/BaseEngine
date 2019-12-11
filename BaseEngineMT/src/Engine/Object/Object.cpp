@@ -1,5 +1,6 @@
 #include "Engine/Object/Object.hpp"
 #include "Engine/Engine.hpp"
+#include "Engine/Manager/LogManager.hpp"
 
 #include <sstream>
 
@@ -23,9 +24,7 @@ void Object::Draw(unsigned int s)
 		if (model)
 		{
 			m_modelReady = true;
-			std::ostringstream buf;
-			buf << "Model Setted : " << m_modelName << std::endl;
-			std::cout << buf.str();
+			EngineLog("Model setted : " + m_modelName);
 			return;
 		}
 	}
@@ -35,6 +34,18 @@ void Object::Draw(unsigned int s)
 
 	if (!Core::Engine::GetEngine()->GetRessourceManager()->FindModel(m_modelName))
 		m_modelReady = false;
+}
+
+
+
+void Object::SetNewModel(const std::string& newName)
+{
+	if (Core::Engine::GetEngine()->GetRessourceManager()->FindModel(newName) != nullptr)
+	{
+		SetModelName(newName);
+		m_modelReady = false;
+		model = nullptr;
+	}
 }
 
 

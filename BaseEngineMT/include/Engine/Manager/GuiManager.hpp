@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include "Engine/Structure/LogWindow.hpp"
 
 class GuiManager
 {
@@ -24,6 +24,7 @@ public:
 	~GuiManager() = default; // DTOR
 
 #pragma region public attributes
+	LogWindow lw;
 #pragma endregion
 
 #pragma region public methods

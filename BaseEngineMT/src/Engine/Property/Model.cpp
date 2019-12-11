@@ -1,5 +1,6 @@
 #include "Engine/Property/Model.hpp"
 #include "Engine/Engine.hpp"
+#include "Engine/Manager/LogManager.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -13,13 +14,11 @@ Core::Model::Model(std::string path)
 													aiProcess_GenNormals);
 
 	if (!pScene || pScene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !pScene->mRootNode)
-		std::cout << "error loading " << path << std::endl;
+		EngineLog("Error loading " + std::string(path));
 
 	m_directoryBis = m_fullpath = path;
 	m_directoryBis = (m_directoryBis.substr(0, m_directoryBis.find_last_of('/')));
 
-	
-	
 	if (pScene)
 	{
 		aiNode* node = pScene->mRootNode;
@@ -226,17 +225,18 @@ void Core::Model::SetTextureDiffuse(const std::string& name)
 
 	if (eng->GetRessourceManager()->FindTexture(name))
 	{
-		std::cout << eng->GetRessourceManager()->FindTexture(name)->type << std::endl;
 		if (eng->GetRessourceManager()->FindTexture(name)->type == "texture_diffuse")
 		{
+			eng->GetRessourceManager()->FindTexture(name)->Use();
 			for (auto& mesh : m_mesh)
 			{
-				mesh.first.textures.clear();
+				if (mesh.first.textures.empty())
+					mesh.first.textures.clear();
 				mesh.first.textures.push_back(*eng->GetRessourceManager()->FindTexture(name));
 			}
 		}
 	}
 
 	else
-		std::cout << "pas trouve : " << name << std::endl;
+		EngineLog("Unfounded Model " + name);
 }

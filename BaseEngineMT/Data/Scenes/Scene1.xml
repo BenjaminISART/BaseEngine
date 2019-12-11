@@ -21,6 +21,7 @@
     <!--<Model name="city">Resources/Model/city.obj</Model>-->
 
     <Texture name="undefined">Resources/Textures/undefined.png</Texture>
+    <Texture name="white">Resources/Textures/white.jpg</Texture>
   </Resource>
 
   <GameObject name="benji">
